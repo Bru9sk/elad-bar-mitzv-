@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elad Lyron — Bar-Mitsvah 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --deep: #0d0d0d;
+    --card: #111111;
+    --border: #1e1e1e;
+    --silver: #c0c0c0;
+    --gold: #b8a97a;
+    --white: #f5f5f5;
+    --muted: #666666;
+    --glow: rgba(192,192,192,0.15);
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-body: 'Rajdhani', sans-serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--silver);
+    position: fixed; pointer-events: none;
+    z-index: 9999; transform: translate(-50%,-50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--silver);
+    position: fixed; pointer-events: none;
+    z-index: 9998; transform: translate(-50%,-50%);
+    transition: all 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  body:hover .cursor { opacity:1; }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9990; opacity: 0.4;
+  }
+
+  /* HEADER */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem;
+    height: 72px;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.98), rgba(8,8,8,0));
+    border-bottom: 1px solid rgba(192,192,192,0.08);
+    backdrop-filter: blur(8px);
+  }
+
+  .logo-area {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .logo-placeholder {
+    width: 44px; height: 44px;
+    border: 1px solid var(--silver);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.1rem; color: var(--silver);
+    letter-spacing: 2px;
+    position: relative; overflow: hidden;
+    /* SUBSTITUIR: troque este elemento por uma tag <img src="sua-logo.png"> */
+  }
+  .logo-placeholder::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(192,192,192,0.1) 100%);
+  }
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 1rem; letter-spacing: 6px;
+    color: var(--silver); text-transform: uppercase;
+  }
+  .logo-sub {
+    font-family: var(--font-serif); font-size: 0.7rem;
+    color: var(--muted); letter-spacing: 2px; display: block;
+    margin-top: 2px;
+  }
+
+  nav { display: flex; align-items: center; gap: 2.5rem; }
+  nav a {
+    font-family: var(--font-body); font-weight: 600;
+    font-size: 0.75rem; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--muted);
+    text-decoration: none;
+    position: relative; padding-bottom: 4px;
+    transition: color 0.3s;
+  }
+  nav a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 1px; background: var(--silver);
+    transition: width 0.3s;
+  }
+  nav a:hover, nav a.active { color: var(--silver); }
+  nav a:hover::after, nav a.active::after { width: 100%; }
+
+  .lang-switcher {
+    display: flex; gap: 6px; align-items: center;
+  }
+  .lang-btn {
+    background: none; border: none; cursor: pointer;
+    font-family: var(--font-body); font-weight: 700;
+    font-size: 0.65rem; letter-spacing: 2px;
+    color: var(--muted); text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .lang-btn:hover, .lang-btn.active {
+    color: var(--black); background: var(--silver);
+  }
+
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 1px;
+    background: var(--silver); transition: all 0.3s;
+  }
+
+  /* PAGES */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ==================== HOME ==================== */
+  .hero {
+    height: 100vh;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('https://i.postimg.cc/Yh0Dq7Pn/IMG-1245.jpg') center/cover no-repeat;
+    filter: brightness(0.25) saturate(0.3);
+    transform: scale(1.05);
+    animation: heroZoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.12); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, var(--black) 100%),
+                linear-gradient(to right, rgba(8,8,8,0.5) 0%, transparent 50%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 0 2rem;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-family: var(--font-body); font-size: 0.65rem;
+    letter-spacing: 8px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(184,169,122,0.4);
+    padding: 6px 20px; margin-bottom: 2rem;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.9; letter-spacing: -2px;
+    color: var(--white);
+    animation: fadeUp 1s ease 0.5s both;
+  }
+  .hero-title span { color: var(--silver); display: block; }
+  .hero-subtitle {
+    font-family: var(--font-serif); font-size: clamp(1rem, 2vw, 1.5rem);
+    font-style: italic; color: var(--muted); margin-top: 1.5rem;
+    letter-spacing: 2px;
+    animation: fadeUp 1s ease 0.7s both;
+  }
+  .hero-date {
+    font-family: var(--font-body); font-size: 0.7rem;
+    letter-spacing: 8px; text-transform: uppercase;
+    color: var(--gold); margin-top: 2rem;
+    animation: fadeUp 1s ease 0.9s both;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    z-index: 2;
+    animation: fadeUp 1s ease 1.1s both;
+  }
+  .hero-scroll span {
+    font-size: 0.6rem; letter-spacing: 4px; color: var(--muted);
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--silver), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(30px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  /* DESTAQUES */
+  .section { padding: 8rem 4rem; }
+  .section-header {
+    display: flex; align-items: baseline; gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .section-number {
+    font-family: var(--font-display); font-size: 4rem;
+    color: var(--border); line-height: 1;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 3px; color: var(--white);
+    text-transform: uppercase;
+  }
+  .section-line {
+    flex: 1; height: 1px; background: var(--border); align-self: center;
+  }
+
+  /* TABS */
+  .tabs-nav {
+    display: flex; gap: 0; margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    font-family: var(--font-body); font-weight: 600;
+    font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--muted); padding: 1rem 1.5rem;
+    position: relative; white-space: nowrap;
+    transition: color 0.3s;
+  }
+  .tab-btn::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 2px; background: var(--silver);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .tab-btn.active { color: var(--silver); }
+  .tab-btn.active::after { transform: scaleX(1); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* MASONRY / GALLERY GRID */
+  .gallery-masonry {
+    columns: 3; column-gap: 12px;
+  }
+  .gallery-masonry .img-wrap {
+    break-inside: avoid; margin-bottom: 12px;
+    overflow: hidden; position: relative;
+    cursor: none;
+  }
+  .gallery-masonry img {
+    width: 100%; display: block;
+    filter: grayscale(20%) brightness(0.85);
+    transition: filter 0.5s, transform 0.6s;
+  }
+  .gallery-masonry .img-wrap:hover img {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.04);
+  }
+  .img-wrap .img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 1.5rem;
+  }
+  .img-wrap:hover .img-overlay { opacity: 1; }
+  .img-expand {
+    font-size: 0.65rem; letter-spacing: 4px; color: var(--silver);
+    text-transform: uppercase;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .gallery-grid .img-wrap {
+    overflow: hidden; position: relative; aspect-ratio: 4/3;
+    cursor: none;
+  }
+  .gallery-grid img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(20%) brightness(0.85);
+    transition: filter 0.5s, transform 0.6s;
+  }
+  .gallery-grid .img-wrap:hover img {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.08);
+  }
+
+  /* DESTAQUES HERO GRID */
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 400px 280px;
+    gap: 8px;
+  }
+  .highlights-grid .h-main {
+    grid-row: 1 / 3;
+    overflow: hidden; position: relative;
+  }
+  .highlights-grid .h-item {
+    overflow: hidden; position: relative;
+  }
+  .highlights-grid img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(30%) brightness(0.8);
+    transition: all 0.6s;
+  }
+  .highlights-grid .img-wrap:hover img {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.05);
+  }
+
+  /* INNER PAGES */
+  .page-hero {
+    height: 60vh; position: relative; overflow: hidden;
+    display: flex; align-items: flex-end; padding: 4rem;
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    filter: brightness(0.25) saturate(0.2);
+  }
+  .page-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent, var(--black) 90%);
+  }
+  .page-hero-content { position: relative; z-index: 2; }
+  .page-hero-eyebrow {
+    font-size: 0.65rem; letter-spacing: 6px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .page-hero-eyebrow::before {
+    content: ''; display: inline-block; width: 40px; height: 1px;
+    background: var(--gold);
+  }
+  .page-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 7rem);
+    letter-spacing: 2px; line-height: 0.9;
+  }
+
+  .page-text-section {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    padding: 6rem 4rem; align-items: center;
+  }
+  .page-text-section.reverse { direction: rtl; }
+  .page-text-section.reverse > * { direction: ltr; }
+  .page-quote {
+    font-family: var(--font-serif); font-size: clamp(1.1rem, 2vw, 1.6rem);
+    font-style: italic; line-height: 1.8; color: var(--white);
+    position: relative; padding-left: 2rem;
+  }
+  .page-quote::before {
+    content: '"';
+    position: absolute; left: 0; top: -10px;
+    font-size: 5rem; color: var(--border); line-height: 1;
+    font-family: var(--font-serif);
+  }
+  .page-img-feature {
+    position: relative; overflow: hidden;
+  }
+  .page-img-feature img {
+    width: 100%; display: block;
+    filter: grayscale(15%) brightness(0.9);
+    transition: filter 0.6s;
+  }
+  .page-img-feature:hover img { filter: grayscale(0%) brightness(1); }
+  .page-img-feature::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(to right, var(--silver), var(--gold));
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.96); align-items: center; justify-content: center;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 90vw; max-height: 90vh;
+    object-fit: contain; border: 1px solid var(--border);
+  }
+  .lightbox-close {
+    position: absolute; top: 2rem; right: 2rem;
+    background: none; border: 1px solid var(--border);
+    color: var(--silver); font-size: 1.5rem; cursor: pointer;
+    width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .lightbox-close:hover { background: var(--silver); color: var(--black); }
+  .lightbox-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: none; border: 1px solid var(--border);
+    color: var(--silver); font-size: 1.5rem; cursor: pointer;
+    width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .lightbox-nav:hover { background: rgba(255,255,255,0.1); }
+  .lightbox-prev { left: 2rem; }
+  .lightbox-next { right: 2rem; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 4rem;
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 3rem; align-items: center;
+  }
+  .footer-brand .brand-name {
+    font-family: var(--font-display); font-size: 2rem;
+    letter-spacing: 4px; color: var(--white);
+  }
+  .footer-brand p {
+    font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem;
+    letter-spacing: 2px;
+  }
+  .footer-contacts {
+    display: flex; flex-direction: column; gap: 1rem; align-items: center;
+  }
+  .footer-contact-item {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 0.8rem; color: var(--muted);
+    text-decoration: none; transition: color 0.2s;
+    letter-spacing: 1px;
+  }
+  .footer-contact-item:hover { color: var(--silver); }
+  .contact-icon {
+    width: 36px; height: 36px; border: 1px solid var(--border);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .footer-contact-item:hover .contact-icon {
+    border-color: var(--silver); background: var(--silver); color: var(--black);
+  }
+  .footer-copy {
+    text-align: right;
+    font-size: 0.65rem; color: var(--muted); letter-spacing: 2px;
+    line-height: 1.8;
+  }
+
+  /* MIB DIVIDER */
+  .mib-divider {
+    display: flex; align-items: center; gap: 2rem; padding: 0 4rem;
+    margin: 2rem 0;
+  }
+  .mib-divider::before, .mib-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+  .mib-badge {
+    font-family: var(--font-display); font-size: 0.6rem;
+    letter-spacing: 8px; color: var(--muted); text-transform: uppercase;
+    border: 1px solid var(--border); padding: 6px 16px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .gallery-masonry { columns: 2; }
+    .highlights-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .highlights-grid .h-main { grid-row: auto; grid-column: 1 / -1; }
+    .page-text-section { grid-template-columns: 1fr; gap: 3rem; }
+    .page-text-section.reverse { direction: ltr; }
+    footer { grid-template-columns: 1fr; text-align: center; }
+    .footer-copy { text-align: center; }
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 0 1.5rem; }
+    nav { display: none; position: fixed; inset: 0; top: 72px;
+      background: var(--deep); flex-direction: column; justify-content: center;
+      align-items: center; gap: 2rem; z-index: 999;
+    }
+    nav.open { display: flex; }
+    nav a { font-size: 1.2rem; }
+    .hamburger { display: flex; }
+    .section { padding: 4rem 1.5rem; }
+    .page-hero { padding: 2rem 1.5rem; }
+    .page-text-section { padding: 3rem 1.5rem; }
+    footer { padding: 3rem 1.5rem; }
+    .mib-divider { padding: 0 1.5rem; }
+    .gallery-masonry { columns: 2; }
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .hero-title { font-size: clamp(3rem, 15vw, 6rem); }
+    .lightbox-prev { left: 0.5rem; }
+    .lightbox-next { right: 0.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-masonry { columns: 1; }
+    .tabs-nav { flex-wrap: nowrap; }
+  }
+
+  /* ANIMATIONS ON SCROLL */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* SILVER LINE ACCENT */
+  .silver-line {
+    width: 60px; height: 2px;
+    background: linear-gradient(to right, var(--silver), var(--gold));
+    margin: 1.5rem 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">›</button>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <!-- LOGO: substitua o div abaixo por <img src="sua-logo.png" style="height:44px"> -->
+    <div class="logo-placeholder">BK</div>
+    <div>
+      <span class="logo-text">Bru9sk Films</span>
+      <span class="logo-sub">Photography & Film</span>
+    </div>
+  </div>
+
+  <nav id="mainNav">
+    <a href="#" class="active" data-page="home" data-i18n="nav_home">Home</a>
+    <a href="#" data-page="familia" data-i18n="nav_familia">Família</a>
+    <a href="#" data-page="aniversariante" data-i18n="nav_aniversariante">Aniversariante</a>
+    <a href="#" data-page="convidados" data-i18n="nav_convidados">Convidados</a>
+  </nav>
+
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ==================== HOME ==================== -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge" data-i18n="hero_badge">Bar-Mitsvah · Men in Black · 2026</div>
+      <h1 class="hero-title">
+        ELAD<span>LYRON</span>
+      </h1>
+      <p class="hero-subtitle" data-i18n="hero_subtitle">Uma noite que o tempo não apagará</p>
+      <p class="hero-date">18 Avril 2026 · Liège, Belgique</p>
+    </div>
+    <div class="hero-scroll">
+      <span data-i18n="scroll_text">SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- DESTAQUES -->
+  <section class="section reveal">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2 class="section-title" data-i18n="highlights_title">Destaques</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="highlights-grid">
+      <div class="img-wrap h-main" onclick="openLightbox('https://i.postimg.cc/XpJ00wLb/Convidados001.jpg',this)">
+        <img src="https://i.postimg.cc/XpJ00wLb/Convidados001.jpg" alt="Destaque">
+        <div class="img-overlay"><span class="img-expand">↗</span></div>
+      </div>
+      <div class="img-wrap h-item" onclick="openLightbox('https://i.postimg.cc/Yh0Dq7Pn/IMG-1245.jpg',this)">
+        <img src="https://i.postimg.cc/Yh0Dq7Pn/IMG-1245.jpg" alt="Destaque">
+        <div class="img-overlay"><span class="img-expand">↗</span></div>
+      </div>
+      <div class="img-wrap h-item" onclick="openLightbox('https://i.postimg.cc/KRgmCPQC/Elad-00.jpg',this)">
+        <img src="https://i.postimg.cc/KRgmCPQC/Elad-00.jpg" alt="Destaque">
+        <div class="img-overlay"><span class="img-expand">↗</span></div>
+      </div>
+      <div class="img-wrap h-item" onclick="openLightbox('https://i.postimg.cc/SJBMn0dn/IMG-1274.jpg',this)">
+        <img src="https://i.postimg.cc/SJBMn0dn/IMG-1274.jpg" alt="Destaque">
+        <div class="img-overlay"><span class="img-expand">↗</span></div>
+      </div>
+      <div class="img-wrap h-item" onclick="openLightbox('https://i.postimg.cc/8sGXr3yb/20260418-195859.jpg',this)">
+        <img src="https://i.postimg.cc/8sGXr3yb/20260418-195859.jpg" alt="Destaque">
+        <div class="img-overlay"><span class="img-expand">↗</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mib-divider">
+    <span class="mib-badge">Men In Black · Universal Protection · Liège 2026</span>
+  </div>
+
+  <!-- ABAS / TABS -->
+  <section class="section reveal">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2 class="section-title" data-i18n="gallery_title">Galeria</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab(this,'tab-familia')" data-i18n="tab_familia">Família</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-recepcao')" data-i18n="tab_recepcao">Recepção</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-convidados')" data-i18n="tab_convidados">Convidados</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-discurso')" data-i18n="tab_discurso">Discurso</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-pista')" data-i18n="tab_pista">Pista de Dança</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-decoracao')" data-i18n="tab_decoracao">Decoração</button>
+    </div>
+
+    <!-- TAB: Família -->
+    <div class="tab-content active" id="tab-familia">
+      <div class="gallery-masonry" id="gal-familia"></div>
+    </div>
+    <!-- TAB: Recepção -->
+    <div class="tab-content" id="tab-recepcao">
+      <div class="gallery-masonry" id="gal-recepcao"></div>
+    </div>
+    <!-- TAB: Convidados -->
+    <div class="tab-content" id="tab-convidados">
+      <div class="gallery-masonry" id="gal-convidados"></div>
+    </div>
+    <!-- TAB: Discurso -->
+    <div class="tab-content" id="tab-discurso">
+      <div class="gallery-masonry" id="gal-discurso"></div>
+    </div>
+    <!-- TAB: Pista de Dança -->
+    <div class="tab-content" id="tab-pista">
+      <div class="gallery-masonry" id="gal-pista"></div>
+    </div>
+    <!-- TAB: Decoração -->
+    <div class="tab-content" id="tab-decoracao">
+      <div class="gallery-masonry" id="gal-decoracao"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="brand-name">BRU9SK</div>
+      <p data-i18n="footer_tagline">Photography & Cinematography</p>
+    </div>
+    <div class="footer-contacts">
+      <a href="https://wa.me/455135231" target="_blank" class="footer-contact-item">
+        <div class="contact-icon">📱</div>
+        <span>+32 455 135 231</span>
+      </a>
+      <a href="mailto:bru9skfilms@gmail.com" class="footer-contact-item">
+        <div class="contact-icon">✉</div>
+        <span>bru9skfilms@gmail.com</span>
+      </a>
+      <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-contact-item">
+        <div class="contact-icon">◈</div>
+        <span>@bru9skfilms</span>
+      </a>
+    </div>
+    <div class="footer-copy">
+      <p>© 2026 Bru9sk Films</p>
+      <p data-i18n="footer_rights">Todos os direitos reservados</p>
+      <p style="margin-top:0.5rem;color:#333">Bar-Mitsvah · Elad Lyron</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== FAMÍLIA ==================== -->
+<div class="page" id="page-familia">
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://i.postimg.cc/SJBMn0dn/IMG-1274.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-eyebrow" data-i18n="familia_eyebrow">A força de um clã</p>
+      <h1 class="page-hero-title" data-i18n="nav_familia">Família</h1>
+    </div>
+  </div>
+
+  <div class="page-text-section reveal">
+    <div class="page-img-feature">
+      <img src="https://i.postimg.cc/FdRZDg3M/20260418-222427.jpg" alt="Família">
+    </div>
+    <div>
+      <div class="silver-line"></div>
+      <p class="page-quote" data-i18n="familia_quote">
+        A família é o alicerce sobre o qual toda história de vida é erguida. 
+        Neste dia sagrado, cada olhar trocado, cada abraço dado, cada lágrima de alegria 
+        derramada é o testemunho de um amor que atravessa gerações. Elad, você está aqui 
+        porque cada pessoa desta família um dia escolheu estar. E essa escolha é o maior presente.
+      </p>
+    </div>
+  </div>
+
+  <section class="section reveal">
+    <div class="section-header">
+      <span class="section-number">—</span>
+      <h2 class="section-title" data-i18n="all_photos">Todas as Fotos</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="gallery-grid" id="full-familia"></div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="brand-name">BRU9SK</div>
+      <p data-i18n="footer_tagline">Photography & Cinematography</p>
+    </div>
+    <div class="footer-contacts">
+      <a href="https://wa.me/455135231" target="_blank" class="footer-contact-item">
+        <div class="contact-icon">📱</div><span>+32 455 135 231</span>
+      </a>
+      <a href="mailto:bru9skfilms@gmail.com" class="footer-contact-item">
+        <div class="contact-icon">✉</div><span>bru9skfilms@gmail.com</span>
+      </a>
+      <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-contact-item">
+        <div class="contact-icon">◈</div><span>@bru9skfilms</span>
+      </a>
+    </div>
+    <div class="footer-copy">
+      <p>© 2026 Bru9sk Films</p>
+      <p data-i18n="footer_rights">Todos os direitos reservados</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== ANIVERSARIANTE ==================== -->
+<div class="page" id="page-aniversariante">
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://i.postimg.cc/hhp3Bv2X/IMG-1247.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-eyebrow" data-i18n="aniv_eyebrow">O homem da noite</p>
+      <h1 class="page-hero-title">Elad Lyron</h1>
+    </div>
+  </div>
+
+  <div class="page-text-section reverse reveal">
+    <div class="page-img-feature">
+      <img src="https://i.postimg.cc/K4Js2j0Y/IMG-1248.jpg" alt="Elad">
+    </div>
+    <div>
+      <div class="silver-line"></div>
+      <p class="page-quote" data-i18n="aniv_quote">
+        Treze anos. Uma passagem. Um jovem que hoje dá um passo à frente 
+        e diz ao mundo: "Estou pronto." Com elegância digna de um agente secreto 
+        e um coração cheio de sonhos, Elad Lyron entra nesta nova fase da vida 
+        com a graça de quem já sabe que a maior aventura ainda está por vir.
+      </p>
+    </div>
+  </div>
+
+  <section class="section reveal">
+    <div class="section-header">
+      <span class="section-number">—</span>
+      <h2 class="section-title" data-i18n="all_photos">Todas as Fotos</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="gallery-grid" id="full-aniversariante"></div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="brand-name">BRU9SK</div>
+      <p data-i18n="footer_tagline">Photography & Cinematography</p>
+    </div>
+    <div class="footer-contacts">
+      <a href="https://wa.me/455135231" target="_blank" class="footer-contact-item">
+        <div class="contact-icon">📱</div><span>+32 455 135 231</span>
+      </a>
+      <a href="mailto:bru9skfilms@gmail.com" class="footer-contact-item">
+        <div class="contact-icon">✉</div><span>bru9skfilms@gmail.com</span>
+      </a>
+      <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-contact-item">
+        <div class="contact-icon">◈</div><span>@bru9skfilms</span>
+      </a>
+    </div>
+    <div class="footer-copy">
+      <p>© 2026 Bru9sk Films</p>
+      <p data-i18n="footer_rights">Todos os direitos reservados</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== CONVIDADOS ==================== -->
+<div class="page" id="page-convidados">
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://i.postimg.cc/KRzyynfR/Convidados002.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-eyebrow" data-i18n="conv_eyebrow">Os agentes da noite</p>
+      <h1 class="page-hero-title" data-i18n="nav_convidados">Convidados</h1>
+    </div>
+  </div>
+
+  <div class="page-text-section reveal">
+    <div class="page-img-feature">
+      <img src="https://i.postimg.cc/8j5VVh46/Convidados003.jpg" alt="Convidados">
+    </div>
+    <div>
+      <div class="silver-line"></div>
+      <p class="page-quote" data-i18n="conv_quote">
+        Uma celebração só tem sentido quando partilhada. 
+        Cada convidado trouxe consigo uma memória, um sorriso, 
+        uma história que entrelaça para sempre com a noite de Elad. 
+        Unidos pelo mesmo tema, pelo mesmo preto e branco elegante, 
+        foram os agentes da alegria que tornaram esta noite verdadeiramente inesquecível.
+      </p>
+    </div>
+  </div>
+
+  <section class="section reveal">
+    <div class="section-header">
+      <span class="section-number">—</span>
+      <h2 class="section-title" data-i18n="all_photos">Todas as Fotos</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="gallery-grid" id="full-convidados"></div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="brand-name">BRU9SK</div>
+      <p data-i18n="footer_tagline">Photography & Cinematography</p>
+    </div>
+    <div class="footer-contacts">
+      <a href="https://wa.me/455135231" target="_blank" class="footer-contact-item">
+        <div class="contact-icon">📱</div><span>+32 455 135 231</span>
+      </a>
+      <a href="mailto:bru9skfilms@gmail.com" class="footer-contact-item">
+        <div class="contact-icon">✉</div><span>bru9skfilms@gmail.com</span>
+      </a>
+      <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-contact-item">
+        <div class="contact-icon">◈</div><span>@bru9skfilms</span>
+      </a>
+    </div>
+    <div class="footer-copy">
+      <p>© 2026 Bru9sk Films</p>
+      <p data-i18n="footer_rights">Todos os direitos reservados</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ==================== DATA ====================
+const PHOTOS = {
+  familia: [
+    'https://i.postimg.cc/FdRZDg3M/20260418-222427.jpg',
+    'https://i.postimg.cc/vgBz3L5s/20260418-222436.jpg',
+    'https://i.postimg.cc/phTZqYz3/20260418-222450.jpg',
+    'https://i.postimg.cc/BL6gMcHw/20260418-222454.jpg',
+    'https://i.postimg.cc/SJBMn0dn/IMG-1274.jpg',
+    'https://i.postimg.cc/qN2CnmDD/IMG-1275.jpg',
+    'https://i.postimg.cc/TKnWmkNH/IMG-1276.jpg',
+    'https://i.postimg.cc/VJXbM7ZX/IMG-1277.jpg',
+    'https://i.postimg.cc/1n7gPb4Q/IMG-1279.jpg',
+    'https://i.postimg.cc/BP8jvN1b/IMG-1280.jpg',
+    'https://i.postimg.cc/bSGZvL2t/IMG-1281.jpg',
+    'https://i.postimg.cc/FkfYKGJb/IMG-1282.jpg',
+    'https://i.postimg.cc/KRMKSqbX/IMG-1283.jpg',
+    'https://i.postimg.cc/ZCd9t7S2/IMG-1322.jpg',
+  ],
+  recepcao: [
+    'https://i.postimg.cc/BtvhZsLf/IMG-1264.jpg',
+    'https://i.postimg.cc/dLbn9yWF/IMG-1272.jpg',
+    'https://i.postimg.cc/QFcmYdPc/IMG-1273.jpg',
+    'https://i.postimg.cc/RWwdpZ8Y/IMG-1287.jpg',
+    'https://i.postimg.cc/xJ8KQfx0/IMG-1299.jpg',
+    'https://i.postimg.cc/vD1WSmxQ/IMG-1311.jpg',
+    'https://i.postimg.cc/Jt9bwWjg/IMG-1312.jpg',
+    'https://i.postimg.cc/fk6x4hxs/IMG-1313.jpg',
+    'https://i.postimg.cc/r07tLSRt/IMG-1321.jpg',
+    'https://i.postimg.cc/SY8YQJc7/IMG-1336.jpg',
+    'https://i.postimg.cc/vD6VtSCX/IMG-1517.jpg',
+    'https://i.postimg.cc/mzdWcwyk/IMG-1284.jpg',
+    'https://i.postimg.cc/jDNT8yRK/IMG-1285.jpg',
+    'https://i.postimg.cc/9DT2xyC6/IMG-1286.jpg',
+    'https://i.postimg.cc/WdrV90TQ/IMG-1300.jpg',
+    'https://i.postimg.cc/k6YLM57V/IMG-1301.jpg',
+    'https://i.postimg.cc/R39kX8P9/IMG-1303.jpg',
+    'https://i.postimg.cc/w3PnS3f6/IMG-1304.jpg',
+    'https://i.postimg.cc/XBy1VcHb/IMG-1305.jpg',
+    'https://i.postimg.cc/QFDY37c0/IMG-1306.jpg',
+    'https://i.postimg.cc/30p9MrRL/IMG-1307.jpg',
+    'https://i.postimg.cc/G9sXTKKw/IMG-1308.jpg',
+    'https://i.postimg.cc/bDS9bYQ2/IMG-1309.jpg',
+    'https://i.postimg.cc/XBMcgMLW/IMG-1310.jpg',
+    'https://i.postimg.cc/svr4Qr1g/IMG-1314.jpg',
+    'https://i.postimg.cc/21jdG7Qr/IMG-1316.jpg',
+    'https://i.postimg.cc/sMnYNGmP/IMG-1318.jpg',
+  ],
+  convidados: [
+    'https://i.postimg.cc/XpJ00wLb/Convidados001.jpg',
+    'https://i.postimg.cc/KRzyynfR/Convidados002.jpg',
+    'https://i.postimg.cc/8j5VVh46/Convidados003.jpg',
+    'https://i.postimg.cc/SJsppWd2/Convidados004.jpg',
+    'https://i.postimg.cc/phxgc8r6/Convidados005.jpg',
+    'https://i.postimg.cc/G9XZz4Cz/Convidados006.jpg',
+    'https://i.postimg.cc/WtNBMMQx/Convidados007.jpg',
+    'https://i.postimg.cc/4nfDzzr0/Convidados008.jpg',
+    'https://i.postimg.cc/JGtSFR7b/Convidados009.jpg',
+    'https://i.postimg.cc/WdgYR3Bv/Convidados010.png',
+    'https://i.postimg.cc/1g0dFtMZ/Convidados011.jpg',
+    'https://i.postimg.cc/sBPLWXKr/Convidados012.jpg',
+    'https://i.postimg.cc/PvJV0Mj9/Convidados013.jpg',
+    'https://i.postimg.cc/HrXvGxqL/Convidados014.jpg',
+    'https://i.postimg.cc/rDxZ6mB4/Convidados015.jpg',
+    'https://i.postimg.cc/FdsTJx7R/Convidados016.jpg',
+    'https://i.postimg.cc/9D51B2rx/Convidados017.jpg',
+    'https://i.postimg.cc/D8bBs0yt/Convidados018.jpg',
+    'https://i.postimg.cc/qNVQGrzZ/Convidados019.jpg',
+    'https://i.postimg.cc/yDmjQGRV/Convidados020.jpg',
+    'https://i.postimg.cc/sGG9pHyB/Convidados021.jpg',
+    'https://i.postimg.cc/Btjg9bFV/Convidados022.jpg',
+    'https://i.postimg.cc/pymZbrjG/Convidados023.jpg',
+    'https://i.postimg.cc/RqWR5hfV/Convidados024.jpg',
+    'https://i.postimg.cc/KKcP98FQ/Convidados025.jpg',
+    'https://i.postimg.cc/1gWpb130/Convidados026.jpg',
+    'https://i.postimg.cc/0MF72GSB/Convidados027.jpg',
+    'https://i.postimg.cc/njgqcKmg/Convidados028.jpg',
+    'https://i.postimg.cc/kBxWqb57/Convidados029.jpg',
+    'https://i.postimg.cc/FYN3RHfk/Convidados030.jpg',
+    'https://i.postimg.cc/TK0mWvmH/Convidados031.jpg',
+  ],
+  discurso: [
+    'https://i.postimg.cc/Dm2kK8Ks/20260418-202435.jpg',
+    'https://i.postimg.cc/c6syNrNK/20260418-202446.jpg',
+    'https://i.postimg.cc/CdFTVzVq/20260418-202449.jpg',
+    'https://i.postimg.cc/0r8RqbqM/20260418-202704.jpg',
+    'https://i.postimg.cc/1ftkf2XQ/20260418-202709.jpg',
+    'https://i.postimg.cc/WhHQr8qn/20260418-202720.jpg',
+    'https://i.postimg.cc/SnYHG9cv/20260418-202817.jpg',
+    'https://i.postimg.cc/PCv0MD14/20260418-202820.jpg',
+    'https://i.postimg.cc/B8xyrGYn/20260418-202859.jpg',
+    'https://i.postimg.cc/qhwF7xdc/20260418-202920.jpg',
+    'https://i.postimg.cc/H8Lh88pb/20260418-202922.jpg',
+    'https://i.postimg.cc/QKMyKKX5/20260418-220129.jpg',
+    'https://i.postimg.cc/2L5KLLzx/20260418-220147.jpg',
+    'https://i.postimg.cc/rzhbXjJN/20260418-221328.jpg',
+    'https://i.postimg.cc/PN6csy46/20260418-221339.jpg',
+    'https://i.postimg.cc/8jjY1vK3/20260418-221457.jpg',
+    'https://i.postimg.cc/kBzpD5Ly/20260418-221502.jpg',
+    'https://i.postimg.cc/nCy3pPQN/IMG-1434.jpg',
+    'https://i.postimg.cc/75Sm6ngR/IMG-1435.jpg',
+    'https://i.postimg.cc/HJH378zw/IMG-1436.jpg',
+    'https://i.postimg.cc/BP8CGTZ0/IMG-1438.jpg',
+    'https://i.postimg.cc/QKBqrQN8/IMG-1439.jpg',
+    'https://i.postimg.cc/Wtt8rvGZ/IMG-1440.jpg',
+    'https://i.postimg.cc/Sjjd8h63/IMG-1442.jpg',
+    'https://i.postimg.cc/LJF3rgcp/IMG-1444.jpg',
+    'https://i.postimg.cc/G4PxrhC6/IMG-1445.jpg',
+    'https://i.postimg.cc/bZ098NPp/IMG-1447.jpg',
+    'https://i.postimg.cc/xXG3YTQY/IMG-1452.jpg',
+    'https://i.postimg.cc/grfVZ6kc/IMG-1455.jpg',
+    'https://i.postimg.cc/VdnjBLd7/IMG-1461.jpg',
+    'https://i.postimg.cc/HrmbSDMd/IMG-1522.jpg',
+    'https://i.postimg.cc/vcfWLHch/IMG-1528.jpg',
+    'https://i.postimg.cc/tZ8xWLbB/IMG-1530.jpg',
+    'https://i.postimg.cc/WqrJnXbL/IMG-1531.jpg',
+    'https://i.postimg.cc/XBFy8Q7q/IMG-1533.jpg',
+  ],
+  pista: [
+    'https://i.postimg.cc/8sGXr3yb/20260418-195859.jpg',
+    'https://i.postimg.cc/bdPV2M6V/20260418-195904.jpg',
+    'https://i.postimg.cc/fksq0FHr/20260418-195907.jpg',
+    'https://i.postimg.cc/ThxNWSks/20260418-195910.jpg',
+    'https://i.postimg.cc/PPr6SDnK/20260418-195921.jpg',
+    'https://i.postimg.cc/w7TWwNY4/20260418-195924.jpg',
+    'https://i.postimg.cc/QH4fwMjS/20260418-200044.jpg',
+    'https://i.postimg.cc/CzLvc8pN/20260418-200045.jpg',
+    'https://i.postimg.cc/fJ28pbww/20260418-200050.jpg',
+    'https://i.postimg.cc/nXX3JtzD/20260418-200153.jpg',
+    'https://i.postimg.cc/mPPmsGD3/20260418-200158.jpg',
+    'https://i.postimg.cc/w1n0xbym/20260418-200208.jpg',
+    'https://i.postimg.cc/rD7QyYR6/20260418-200212.jpg',
+    'https://i.postimg.cc/2bDGhbx3/20260418-200220.jpg',
+    'https://i.postimg.cc/wyp2Lykm/20260418-200358.jpg',
+    'https://i.postimg.cc/5YVgLYmn/20260418-200450.jpg',
+    'https://i.postimg.cc/0M0ffktX/20260418-200457.jpg',
+    'https://i.postimg.cc/zHDk2sM4/20260418-200611.jpg',
+    'https://i.postimg.cc/6TBzQZqN/20260418-200841.jpg',
+    'https://i.postimg.cc/9zc1f9MS/20260418-200848.jpg',
+    'https://i.postimg.cc/yWnj3N3d/20260418-200931.jpg',
+    'https://i.postimg.cc/RqvG0thZ/20260418-200936.jpg',
+    'https://i.postimg.cc/ykdPmz03/20260418-201101.jpg',
+    'https://i.postimg.cc/zVBjC1Tn/20260418-201220.jpg',
+    'https://i.postimg.cc/PPx4Wk17/dance001.png',
+    'https://i.postimg.cc/ZCMLjDLM/Dance002.png',
+    'https://i.postimg.cc/SnYfP7T6/Dance003.png',
+    'https://i.postimg.cc/svXcYRpF/Dance004.jpg',
+    'https://i.postimg.cc/3yMFQ4Vc/Dance005.png',
+    'https://i.postimg.cc/8F8mgJ9Y/Dance006.png',
+  ],
+  decoracao: [
+    'https://i.postimg.cc/p9Wk5BSM/20260418-181402.jpg',
+    'https://i.postimg.cc/fkGKfsPm/20260418-181408.jpg',
+    'https://i.postimg.cc/vc5vPjRK/20260418-181419.jpg',
+    'https://i.postimg.cc/cKFhRnqs/20260418-181543.jpg',
+    'https://i.postimg.cc/RqYMPs1Y/20260418-182445.jpg',
+    'https://i.postimg.cc/9zkWx8Ps/20260418-182457.jpg',
+    'https://i.postimg.cc/KRgmCPQC/Elad-00.jpg',
+    'https://i.postimg.cc/vgNdNTnb/Elad-00-1.jpg',
+    'https://i.postimg.cc/xJ4S48mq/IMG-1227.jpg',
+    'https://i.postimg.cc/Ty2M2gqf/IMG-1229.jpg',
+    'https://i.postimg.cc/3yr5rmCx/IMG-1231.jpg',
+    'https://i.postimg.cc/fVKpPk4H/IMG-1232.jpg',
+    'https://i.postimg.cc/47Mr1MCQ/IMG-1234.jpg',
+    'https://i.postimg.cc/DW0jYgPd/IMG-1235.jpg',
+    'https://i.postimg.cc/D83Ny1nN/IMG-1236.jpg',
+    'https://i.postimg.cc/wRX0sb96/IMG-1237.jpg',
+    'https://i.postimg.cc/RJ7Xnb4j/IMG-1238.jpg',
+    'https://i.postimg.cc/NyZ4Cw0V/IMG-1240.jpg',
+    'https://i.postimg.cc/t735kwH0/IMG-1242.jpg',
+    'https://i.postimg.cc/qzmZcS8v/IMG-1244.jpg',
+    'https://i.postimg.cc/QKhcvNZy/IMG-1251.jpg',
+    'https://i.postimg.cc/569RCbQZ/IMG-1252.jpg',
+    'https://i.postimg.cc/S27gnvyw/IMG-1254.jpg',
+    'https://i.postimg.cc/Z0bcfjY5/IMG-1255.jpg',
+    'https://i.postimg.cc/2qNdn79g/IMG-1511.jpg',
+    'https://i.postimg.cc/XZ6K9kDp/IMG-1512.jpg',
+    'https://i.postimg.cc/QKCcj4Vk/IMG-1513.jpg',
+    'https://i.postimg.cc/R6snp7GL/IMG-1514.jpg',
+    'https://i.postimg.cc/vc66X6nf/IMG-1515.jpg',
+    'https://i.postimg.cc/PCWvns2t/IMG-1516.jpg',
+    'https://i.postimg.cc/B8qbWmh7/IMG-1256.jpg',
+    'https://i.postimg.cc/Ff9ztTWm/IMG-1259.jpg',
+    'https://i.postimg.cc/QFZVm8cr/IMG-1260.jpg',
+    'https://i.postimg.cc/2qzyp0Hw/IMG-1263.jpg',
+  ],
+  aniversariante: [
+    'https://i.postimg.cc/Yh0Dq7Pn/IMG-1245.jpg',
+    'https://i.postimg.cc/hhp3Bv2X/IMG-1247.jpg',
+    'https://i.postimg.cc/K4Js2j0Y/IMG-1248.jpg',
+    'https://i.postimg.cc/crCk4Wzv/IMG-1249.jpg',
+    'https://i.postimg.cc/hJLp3tJj/IMG-1250.jpg',
+    'https://i.postimg.cc/cgdXqGYd/IMG-1289.jpg',
+    'https://i.postimg.cc/k67frP8D/IMG-1291.jpg',
+    'https://i.postimg.cc/xJ9trVHm/IMG-1292.jpg',
+    'https://i.postimg.cc/N2MDM8dy/IMG-1297.jpg',
+    'https://i.postimg.cc/6T5YYwtY/IMG-1298.jpg',
+    'https://i.postimg.cc/XX7QQ34x/IMG-1338.jpg',
+    'https://i.postimg.cc/NLfppYQj/IMG-1339.jpg',
+    'https://i.postimg.cc/zLrkWYxc/IMG-1340.jpg',
+    'https://i.postimg.cc/GBCjYnXF/IMG-1341.jpg',
+    'https://i.postimg.cc/67XhRxMd/IMG-1342.jpg',
+    'https://i.postimg.cc/B80CDfmy/IMG-1343.jpg',
+    'https://i.postimg.cc/bZX0cjc4/IMG-1344.jpg',
+    'https://i.postimg.cc/G40Pw1nh/IMG-1345.jpg',
+    'https://i.postimg.cc/zynCqPq7/IMG-1346.jpg',
+    'https://i.postimg.cc/R34chQ08/IMG-1348.jpg',
+    'https://i.postimg.cc/sQ0STk4L/IMG-1349.jpg',
+    'https://i.postimg.cc/YGygd5xc/IMG-1350.jpg',
+    'https://i.postimg.cc/VrHMKxF1/IMG-1353.jpg',
+    'https://i.postimg.cc/gXBRgCKm/IMG-1354.jpg',
+    'https://i.postimg.cc/rz3xxLmN/IMG-1355.jpg',
+    'https://i.postimg.cc/F7Scxnd8/IMG-1356.jpg',
+    'https://i.postimg.cc/PCkDVz1n/IMG-1357.jpg',
+    'https://i.postimg.cc/WhZr7fFQ/IMG-1358.jpg',
+    'https://i.postimg.cc/JypBhfvy/IMG-1359.jpg',
+    'https://i.postimg.cc/2b3LLHNw/IMG-1360.jpg',
+    'https://i.postimg.cc/47nHH8TZ/IMG-1361.jpg',
+    'https://i.postimg.cc/WFKFGM2D/IMG-1362.jpg',
+    'https://i.postimg.cc/NL32L7J4/IMG-1363.jpg',
+    'https://i.postimg.cc/14kV4cCT/IMG-1364.jpg',
+    'https://i.postimg.cc/YhQGFGTM/IMG-1365.jpg',
+    'https://i.postimg.cc/cvZKB1NY/IMG-1366.jpg',
+    'https://i.postimg.cc/9Rv0RCp2/IMG-1367.jpg',
+    'https://i.postimg.cc/CBW5BSN5/IMG-1368.jpg',
+    'https://i.postimg.cc/tZLJZp5V/IMG-1369.jpg',
+    'https://i.postimg.cc/LYr5Y2Tz/IMG-1370.jpg',
+    'https://i.postimg.cc/k2f5Nxcf/IMG-1371.jpg',
+    'https://i.postimg.cc/xXtdGKR4/IMG-1372.jpg',
+    'https://i.postimg.cc/CRmKCjNJ/IMG-1373.jpg',
+    'https://i.postimg.cc/LJNskzTQ/IMG-1374.jpg',
+    'https://i.postimg.cc/tn3qsPJm/IMG-1375.jpg',
+    'https://i.postimg.cc/F13sCtp7/IMG-1376.jpg',
+    'https://i.postimg.cc/64rW8RqD/IMG-1377.jpg',
+    'https://i.postimg.cc/zHZDDpzn/IMG-1378.jpg',
+  ]
+};
+
+// ==================== I18N ====================
+const TRANSLATIONS = {
+  pt: {
+    nav_home: 'Home', nav_familia: 'Família', nav_aniversariante: 'Aniversariante', nav_convidados: 'Convidados',
+    hero_badge: 'Bar-Mitsvah · Men in Black · 2026',
+    hero_subtitle: 'Uma noite que o tempo não apagará',
+    scroll_text: 'SCROLL',
+    highlights_title: 'Destaques',
+    gallery_title: 'Galeria',
+    tab_familia: 'Família', tab_recepcao: 'Recepção', tab_convidados: 'Convidados',
+    tab_discurso: 'Discurso', tab_pista: 'Pista de Dança', tab_decoracao: 'Decoração',
+    familia_eyebrow: 'A força de um clã',
+    familia_quote: 'A família é o alicerce sobre o qual toda história de vida é erguida. Neste dia sagrado, cada olhar trocado, cada abraço dado, cada lágrima de alegria derramada é o testemunho de um amor que atravessa gerações. Elad, você está aqui porque cada pessoa desta família um dia escolheu estar. E essa escolha é o maior presente.',
+    aniv_eyebrow: 'O homem da noite',
+    aniv_quote: 'Treze anos. Uma passagem. Um jovem que hoje dá um passo à frente e diz ao mundo: "Estou pronto." Com elegância digna de um agente secreto e um coração cheio de sonhos, Elad Lyron entra nesta nova fase da vida com a graça de quem já sabe que a maior aventura ainda está por vir.',
+    conv_eyebrow: 'Os agentes da noite',
+    conv_quote: 'Uma celebração só tem sentido quando partilhada. Cada convidado trouxe consigo uma memória, um sorriso, uma história que entrelaça para sempre com a noite de Elad. Unidos pelo mesmo tema, pelo mesmo preto e branco elegante, foram os agentes da alegria que tornaram esta noite verdadeiramente inesquecível.',
+    all_photos: 'Todas as Fotos',
+    footer_tagline: 'Photography & Cinematography',
+    footer_rights: 'Todos os direitos reservados',
+  },
+  fr: {
+    nav_home: 'Accueil', nav_familia: 'Famille', nav_aniversariante: 'Le Fêté', nav_convidados: 'Invités',
+    hero_badge: 'Bar-Mitsvah · Men in Black · 2026',
+    hero_subtitle: 'Une nuit que le temps ne pourra effacer',
+    scroll_text: 'DÉFILER',
+    highlights_title: 'Moments Forts',
+    gallery_title: 'Galerie',
+    tab_familia: 'Famille', tab_recepcao: 'Réception', tab_convidados: 'Invités',
+    tab_discurso: 'Discours', tab_pista: 'Piste de Danse', tab_decoracao: 'Décoration',
+    familia_eyebrow: 'La force d\'un clan',
+    familia_quote: 'La famille est le fondement sur lequel toute histoire de vie est construite. En ce jour sacré, chaque regard échangé, chaque étreinte, chaque larme de joie témoigne d\'un amour qui traverse les générations. Elad, tu es ici parce que chaque personne de cette famille a un jour choisi d\'être là. Et ce choix est le plus grand cadeau.',
+    aniv_eyebrow: 'L\'homme de la nuit',
+    aniv_quote: 'Treize ans. Un passage. Un jeune homme qui fait aujourd\'hui un pas en avant et dit au monde : "Je suis prêt." Avec une élégance digne d\'un agent secret et un cœur plein de rêves, Elad Lyron entre dans cette nouvelle étape de la vie avec la grâce de celui qui sait déjà que la plus grande aventure est encore à venir.',
+    conv_eyebrow: 'Les agents de la nuit',
+    conv_quote: 'Une célébration n\'a de sens que lorsqu\'elle est partagée. Chaque invité a apporté avec lui un souvenir, un sourire, une histoire qui s\'entrelace pour toujours avec la nuit d\'Elad. Réunis par le même thème, le même élégant noir et blanc, ils furent les agents de la joie qui ont rendu cette nuit véritablement inoubliable.',
+    all_photos: 'Toutes les Photos',
+    footer_tagline: 'Photographie & Cinématographie',
+    footer_rights: 'Tous droits réservés',
+  },
+  en: {
+    nav_home: 'Home', nav_familia: 'Family', nav_aniversariante: 'Birthday Boy', nav_convidados: 'Guests',
+    hero_badge: 'Bar-Mitzvah · Men in Black · 2026',
+    hero_subtitle: 'A night time will never erase',
+    scroll_text: 'SCROLL',
+    highlights_title: 'Highlights',
+    gallery_title: 'Gallery',
+    tab_familia: 'Family', tab_recepcao: 'Reception', tab_convidados: 'Guests',
+    tab_discurso: 'Speeches', tab_pista: 'Dance Floor', tab_decoracao: 'Decoration',
+    familia_eyebrow: 'The strength of a clan',
+    familia_quote: 'Family is the foundation upon which every life story is built. On this sacred day, every glance exchanged, every embrace given, every tear of joy shed is the testament of a love that spans generations. Elad, you are here because every person in this family once chose to be. And that choice is the greatest gift.',
+    aniv_eyebrow: 'The man of the night',
+    aniv_quote: 'Thirteen years. A passage. A young man who today steps forward and tells the world: "I am ready." With elegance worthy of a secret agent and a heart full of dreams, Elad Lyron enters this new phase of life with the grace of one who already knows the greatest adventure is yet to come.',
+    conv_eyebrow: 'The agents of the night',
+    conv_quote: 'A celebration only makes sense when shared. Every guest brought with them a memory, a smile, a story that forever intertwines with Elad\'s night. United by the same theme, the same elegant black and white, they were the agents of joy who made this night truly unforgettable.',
+    all_photos: 'All Photos',
+    footer_tagline: 'Photography & Cinematography',
+    footer_rights: 'All rights reserved',
+  }
+};
+
+let currentLang = 'pt';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
+  const t = TRANSLATIONS[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key]) el.textContent = t[key];
+  });
+  document.documentElement.lang = lang;
+}
+
+// ==================== BUILD GALLERIES ====================
+function buildMasonry(containerId, photos) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '';
+  photos.forEach((src, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'img-wrap';
+    wrap.innerHTML = `<img src="${src}" alt="Foto ${i+1}" loading="lazy">
+      <div class="img-overlay"><span class="img-expand">↗</span></div>`;
+    wrap.onclick = () => openLightbox(src, wrap, photos);
+    c.appendChild(wrap);
+  });
+}
+
+function buildGrid(containerId, photos) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '';
+  photos.forEach((src, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'img-wrap';
+    wrap.innerHTML = `<img src="${src}" alt="Foto ${i+1}" loading="lazy">
+      <div class="img-overlay"><span class="img-expand">↗</span></div>`;
+    wrap.onclick = () => openLightbox(src, wrap, photos);
+    c.appendChild(wrap);
+  });
+}
+
+// ==================== LIGHTBOX ====================
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+
+function openLightbox(src, el, photosArr) {
+  lightboxPhotos = photosArr || [src];
+  lightboxIndex = lightboxPhotos.indexOf(src);
+  if (lightboxIndex < 0) lightboxIndex = 0;
+  document.getElementById('lightboxImg').src = lightboxPhotos[lightboxIndex];
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function lightboxNav(dir) {
+  lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
+  document.getElementById('lightboxImg').src = lightboxPhotos[lightboxIndex];
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') lightboxNav(1);
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+});
+
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+// ==================== TABS ====================
+function switchTab(btn, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// ==================== PAGE NAVIGATION ====================
+function navigateTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelector(`nav a[data-page="${page}"]`).classList.add('active');
+  window.scrollTo(0,0);
+  // close menu on mobile
+  document.getElementById('mainNav').classList.remove('open');
+}
+
+document.querySelectorAll('nav a[data-page]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    navigateTo(a.dataset.page);
+  });
+});
+
+function toggleMenu() {
+  document.getElementById('mainNav').classList.toggle('open');
+}
+
+// ==================== CURSOR ====================
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 80);
+});
+
+// ==================== SCROLL REVEAL ====================
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+
+function observeReveals() {
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// ==================== INIT ====================
+window.addEventListener('DOMContentLoaded', () => {
+  // Build all galleries
+  buildMasonry('gal-familia', PHOTOS.familia);
+  buildMasonry('gal-recepcao', PHOTOS.recepcao);
+  buildMasonry('gal-convidados', PHOTOS.convidados);
+  buildMasonry('gal-discurso', PHOTOS.discurso);
+  buildMasonry('gal-pista', PHOTOS.pista);
+  buildMasonry('gal-decoracao', PHOTOS.decoracao);
+
+  buildGrid('full-familia', PHOTOS.familia);
+  buildGrid('full-aniversariante', PHOTOS.aniversariante);
+  buildGrid('full-convidados', PHOTOS.convidados);
+
+  observeReveals();
+  setLang('pt');
+});
+</script>
+</body>
+</html>
