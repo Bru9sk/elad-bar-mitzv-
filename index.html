@@ -3,1331 +3,1295 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elad Lyron — Bar-Mitsvah 2026</title>
+<title>Elad Lyron – Bar-Mitzvah | Men in Black</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #080808;
-    --deep: #0d0d0d;
-    --card: #111111;
-    --border: #1e1e1e;
-    --silver: #c0c0c0;
-    --gold: #b8a97a;
-    --white: #f5f5f5;
-    --muted: #666666;
-    --glow: rgba(192,192,192,0.15);
-    --font-display: 'Bebas Neue', sans-serif;
-    --font-serif: 'Cormorant Garamond', serif;
-    --font-body: 'Rajdhani', sans-serif;
+    --black: #050505;
+    --deep: #0a0a0f;
+    --dark: #111118;
+    --card: #161620;
+    --border: #2a2a35;
+    --silver: #8a8a9a;
+    --light: #c8c8d8;
+    --white: #f0f0f8;
+    --gold: #c9a84c;
+    --neon: #7eb8e8;
+    --accent: #4a7fa8;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior:smooth; }
 
   body {
     background: var(--black);
     color: var(--white);
-    font-family: var(--font-body);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
     overflow-x: hidden;
-    cursor: none;
   }
 
-  /* CUSTOM CURSOR */
-  .cursor {
-    width: 10px; height: 10px;
+  /* ─── CURSOR ─────────────────────────────────── */
+  body { cursor: none; }
+  #cursor {
+    width: 12px; height: 12px;
+    background: var(--gold);
     border-radius: 50%;
-    background: var(--silver);
-    position: fixed; pointer-events: none;
-    z-index: 9999; transform: translate(-50%,-50%);
-    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
-    mix-blend-mode: difference;
+    position: fixed; pointer-events: none; z-index: 99999;
+    transform: translate(-50%,-50%);
+    transition: transform .1s, width .2s, height .2s, background .2s;
   }
-  .cursor-ring {
+  #cursor-ring {
     width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,.4);
     border-radius: 50%;
-    border: 1px solid var(--silver);
-    position: fixed; pointer-events: none;
-    z-index: 9998; transform: translate(-50%,-50%);
-    transition: all 0.15s ease;
-    mix-blend-mode: difference;
+    position: fixed; pointer-events: none; z-index: 99998;
+    transform: translate(-50%,-50%);
+    transition: transform .15s ease-out, width .25s, height .25s;
   }
-  body:hover .cursor { opacity:1; }
+  a:hover ~ #cursor, button:hover ~ #cursor { width: 20px; height: 20px; background: var(--neon); }
 
-  /* GRAIN OVERLAY */
+  /* ─── NOISE OVERLAY ──────────────────────────── */
   body::before {
     content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 9990; opacity: 0.4;
+    position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: .4;
   }
 
-  /* HEADER */
+  /* ─── HEADER ─────────────────────────────────── */
   header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 16px 40px;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 3rem;
-    height: 72px;
-    background: linear-gradient(to bottom, rgba(8,8,8,0.98), rgba(8,8,8,0));
-    border-bottom: 1px solid rgba(192,192,192,0.08);
-    backdrop-filter: blur(8px);
+    background: linear-gradient(to bottom, rgba(5,5,5,.98) 0%, rgba(5,5,5,0) 100%);
+    backdrop-filter: blur(0px);
+    transition: background .4s, backdrop-filter .4s;
   }
-
-  .logo-area {
-    display: flex; align-items: center; gap: 14px;
+  header.scrolled {
+    background: rgba(5,5,5,.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
   }
+  .logo-wrap img { height: 52px; object-fit: contain; }
   .logo-placeholder {
-    width: 44px; height: 44px;
-    border: 1px solid var(--silver);
-    border-radius: 2px;
+    height: 52px; width: 120px;
+    border: 1px dashed var(--border);
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-display);
-    font-size: 1.1rem; color: var(--silver);
-    letter-spacing: 2px;
-    position: relative; overflow: hidden;
-    /* SUBSTITUIR: troque este elemento por uma tag <img src="sua-logo.png"> */
-  }
-  .logo-placeholder::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, transparent 40%, rgba(192,192,192,0.1) 100%);
-  }
-  .logo-text {
-    font-family: var(--font-display);
-    font-size: 1rem; letter-spacing: 6px;
-    color: var(--silver); text-transform: uppercase;
-  }
-  .logo-sub {
-    font-family: var(--font-serif); font-size: 0.7rem;
-    color: var(--muted); letter-spacing: 2px; display: block;
-    margin-top: 2px;
+    font-size: 10px; color: var(--silver); letter-spacing: 2px;
+    text-transform: uppercase;
   }
 
-  nav { display: flex; align-items: center; gap: 2.5rem; }
+  nav { display: flex; align-items: center; gap: 8px; }
   nav a {
-    font-family: var(--font-body); font-weight: 600;
-    font-size: 0.75rem; letter-spacing: 4px;
-    text-transform: uppercase; color: var(--muted);
-    text-decoration: none;
-    position: relative; padding-bottom: 4px;
-    transition: color 0.3s;
+    color: var(--light); text-decoration: none;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    padding: 8px 16px;
+    position: relative;
+    transition: color .3s;
   }
   nav a::after {
-    content: ''; position: absolute; bottom: 0; left: 0;
-    width: 0; height: 1px; background: var(--silver);
-    transition: width 0.3s;
+    content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+    height: 1px; background: var(--gold);
+    transform: scaleX(0); transform-origin: right;
+    transition: transform .3s;
   }
-  nav a:hover, nav a.active { color: var(--silver); }
-  nav a:hover::after, nav a.active::after { width: 100%; }
+  nav a:hover { color: var(--gold); }
+  nav a:hover::after, nav a.active::after { transform: scaleX(1); transform-origin: left; }
+  nav a.active { color: var(--gold); }
 
-  .lang-switcher {
-    display: flex; gap: 6px; align-items: center;
-  }
+  .lang-switcher { display: flex; gap: 4px; margin-left: 24px; }
   .lang-btn {
-    background: none; border: none; cursor: pointer;
-    font-family: var(--font-body); font-weight: 700;
-    font-size: 0.65rem; letter-spacing: 2px;
-    color: var(--muted); text-transform: uppercase;
-    padding: 4px 8px;
-    border-radius: 2px;
-    transition: all 0.2s;
+    background: none; border: 1px solid var(--border);
+    color: var(--silver); font-size: 10px; letter-spacing: 2px;
+    padding: 4px 8px; cursor: pointer; transition: all .3s;
+    font-family: 'Montserrat', sans-serif; text-transform: uppercase;
   }
-  .lang-btn:hover, .lang-btn.active {
-    color: var(--black); background: var(--silver);
-  }
+  .lang-btn:hover, .lang-btn.active { border-color: var(--gold); color: var(--gold); }
 
-  .hamburger {
-    display: none; flex-direction: column; gap: 5px;
-    background: none; border: none; cursor: pointer; padding: 4px;
-  }
-  .hamburger span {
-    display: block; width: 24px; height: 1px;
-    background: var(--silver); transition: all 0.3s;
-  }
-
-  /* PAGES */
+  /* ─── PAGES ──────────────────────────────────── */
   .page { display: none; min-height: 100vh; }
   .page.active { display: block; }
 
-  /* ==================== HOME ==================== */
+  /* ─── HOME HERO ──────────────────────────────── */
   .hero {
-    height: 100vh;
-    position: relative; overflow: hidden;
+    height: 100vh; position: relative;
     display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background: url('https://i.postimg.cc/Yh0Dq7Pn/IMG-1245.jpg') center/cover no-repeat;
-    filter: brightness(0.25) saturate(0.3);
-    transform: scale(1.05);
-    animation: heroZoom 20s ease-in-out infinite alternate;
+    background: url('https://i.ibb.co/CT4NfLC/IMG-1361.jpg') center/cover no-repeat;
   }
-  @keyframes heroZoom {
-    from { transform: scale(1.05); }
-    to { transform: scale(1.12); }
-  }
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent 30%, var(--black) 100%),
-                linear-gradient(to right, rgba(8,8,8,0.5) 0%, transparent 50%);
+  .hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(5,5,5,.82) 0%, rgba(5,5,5,.55) 50%, rgba(5,5,5,.85) 100%);
   }
   .hero-content {
-    position: relative; z-index: 2;
-    text-align: center; padding: 0 2rem;
+    position: relative; z-index: 2; text-align: center;
+    padding: 0 20px;
   }
-  .hero-badge {
-    display: inline-block;
-    font-family: var(--font-body); font-size: 0.65rem;
-    letter-spacing: 8px; text-transform: uppercase;
-    color: var(--gold); border: 1px solid rgba(184,169,122,0.4);
-    padding: 6px 20px; margin-bottom: 2rem;
-    animation: fadeUp 1s ease 0.3s both;
+  .hero-eyebrow {
+    font-size: 10px; letter-spacing: 8px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp .8s .3s forwards;
   }
   .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(4rem, 12vw, 10rem);
-    line-height: 0.9; letter-spacing: -2px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: .92; letter-spacing: 6px;
     color: var(--white);
-    animation: fadeUp 1s ease 0.5s both;
+    text-shadow: 0 0 80px rgba(201,168,76,.2);
+    opacity: 0; animation: fadeUp .8s .5s forwards;
   }
-  .hero-title span { color: var(--silver); display: block; }
+  .hero-title span { color: var(--gold); }
   .hero-subtitle {
-    font-family: var(--font-serif); font-size: clamp(1rem, 2vw, 1.5rem);
-    font-style: italic; color: var(--muted); margin-top: 1.5rem;
-    letter-spacing: 2px;
-    animation: fadeUp 1s ease 0.7s both;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 3vw, 32px); font-style: italic;
+    color: var(--light); margin-top: 8px;
+    opacity: 0; animation: fadeUp .8s .7s forwards;
+  }
+  .hero-divider {
+    width: 60px; height: 1px; background: var(--gold);
+    margin: 24px auto;
+    opacity: 0; animation: scaleIn .8s .9s forwards;
   }
   .hero-date {
-    font-family: var(--font-body); font-size: 0.7rem;
-    letter-spacing: 8px; text-transform: uppercase;
-    color: var(--gold); margin-top: 2rem;
-    animation: fadeUp 1s ease 0.9s both;
+    font-size: 11px; letter-spacing: 4px; color: var(--silver);
+    text-transform: uppercase;
+    opacity: 0; animation: fadeUp .8s 1.1s forwards;
   }
   .hero-scroll {
-    position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 8px;
-    z-index: 2;
-    animation: fadeUp 1s ease 1.1s both;
+    color: var(--silver); font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    opacity: 0; animation: fadeUp .8s 1.4s forwards;
   }
-  .hero-scroll span {
-    font-size: 0.6rem; letter-spacing: 4px; color: var(--muted);
+  .hero-scroll-line {
+    width: 1px; height: 48px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
   }
-  .scroll-line {
-    width: 1px; height: 50px;
-    background: linear-gradient(to bottom, var(--silver), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
+
   @keyframes fadeUp {
     from { opacity:0; transform: translateY(30px); }
-    to { opacity:1; transform: translateY(0); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    from { opacity:0; transform: scaleX(0); }
+    to   { opacity:1; transform: scaleX(1); }
+  }
+  @keyframes scrollPulse {
+    0%,100% { opacity:.3; } 50% { opacity:1; }
   }
 
-  /* DESTAQUES */
-  .section { padding: 8rem 4rem; }
-  .section-header {
-    display: flex; align-items: baseline; gap: 2rem;
-    margin-bottom: 4rem;
-  }
-  .section-number {
-    font-family: var(--font-display); font-size: 4rem;
-    color: var(--border); line-height: 1;
+  /* ─── SECTION HEADERS ────────────────────────── */
+  .section { padding: 100px 40px; max-width: 1400px; margin: 0 auto; }
+  .section-label {
+    font-size: 10px; letter-spacing: 6px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 12px;
   }
   .section-title {
-    font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem);
-    letter-spacing: 3px; color: var(--white);
-    text-transform: uppercase;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 80px);
+    letter-spacing: 4px; line-height: 1;
+    color: var(--white);
   }
-  .section-line {
-    flex: 1; height: 1px; background: var(--border); align-self: center;
+  .section-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-style: italic;
+    color: var(--silver); margin-top: 8px;
   }
 
-  /* TABS */
-  .tabs-nav {
-    display: flex; gap: 0; margin-bottom: 3rem;
+  /* ─── HIGHLIGHTS SLIDESHOW ───────────────────── */
+  .highlights-section {
+    background: var(--deep);
+    padding: 100px 0;
+    overflow: hidden;
+  }
+  .highlights-header { text-align: center; margin-bottom: 60px; padding: 0 40px; }
+  .slideshow-container {
+    position: relative; width: 100%; height: 75vh;
+    overflow: hidden;
+  }
+  .slide {
+    position: absolute; inset: 0;
+    opacity: 0; transition: opacity 1.2s ease;
+  }
+  .slide.active { opacity: 1; }
+  .slide img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .slide-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(5,5,5,.7) 0%, transparent 60%);
+  }
+  .slide-counter {
+    position: absolute; bottom: 32px; right: 48px;
+    font-size: 11px; letter-spacing: 3px; color: var(--light);
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+  }
+  .slide-counter span { color: var(--gold); }
+  .slide-nav {
+    position: absolute; bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 8px;
+  }
+  .slide-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border); cursor: pointer;
+    transition: background .3s, transform .3s;
+  }
+  .slide-dot.active { background: var(--gold); transform: scale(1.5); }
+  .slide-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,.5); border: 1px solid var(--border);
+    color: var(--white); font-size: 20px;
+    width: 48px; height: 48px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .3s;
+  }
+  .slide-arrow:hover { border-color: var(--gold); color: var(--gold); }
+  .slide-arrow.prev { left: 24px; }
+  .slide-arrow.next { right: 24px; }
+
+  /* ─── VIGNETTE ───────────────────────────────── */
+  .vignette-section {
+    padding: 80px 40px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .vignette-wrap {
+    position: relative; max-width: 700px; width: 100%;
+  }
+  .vignette-wrap img {
+    width: 100%; border-radius: 2px;
+    filter: drop-shadow(0 0 60px rgba(201,168,76,.15));
+  }
+  .vignette-ring {
+    position: absolute; inset: -20px;
+    border: 1px solid rgba(201,168,76,.2);
+    border-radius: 2px; pointer-events: none;
+  }
+
+  /* ─── GALLERY TABS ───────────────────────────── */
+  .gallery-section { padding: 100px 40px; background: var(--deep); }
+  .tabs {
+    display: flex; gap: 0; flex-wrap: wrap;
     border-bottom: 1px solid var(--border);
-    overflow-x: auto;
+    margin-bottom: 48px;
   }
   .tab-btn {
-    background: none; border: none; cursor: pointer;
-    font-family: var(--font-body); font-weight: 600;
-    font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
-    color: var(--muted); padding: 1rem 1.5rem;
-    position: relative; white-space: nowrap;
-    transition: color 0.3s;
+    background: none; border: none; color: var(--silver);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    padding: 14px 20px; cursor: pointer;
+    position: relative; transition: color .3s;
   }
   .tab-btn::after {
     content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
-    height: 2px; background: var(--silver);
-    transform: scaleX(0); transition: transform 0.3s;
+    height: 2px; background: var(--gold);
+    transform: scaleX(0); transition: transform .3s;
   }
-  .tab-btn.active { color: var(--silver); }
+  .tab-btn:hover { color: var(--light); }
+  .tab-btn.active { color: var(--gold); }
   .tab-btn.active::after { transform: scaleX(1); }
 
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
 
-  /* MASONRY / GALLERY GRID */
-  .gallery-masonry {
-    columns: 3; column-gap: 12px;
-  }
-  .gallery-masonry .img-wrap {
-    break-inside: avoid; margin-bottom: 12px;
-    overflow: hidden; position: relative;
-    cursor: none;
-  }
-  .gallery-masonry img {
-    width: 100%; display: block;
-    filter: grayscale(20%) brightness(0.85);
-    transition: filter 0.5s, transform 0.6s;
-  }
-  .gallery-masonry .img-wrap:hover img {
-    filter: grayscale(0%) brightness(1);
-    transform: scale(1.04);
-  }
-  .img-wrap .img-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-    opacity: 0; transition: opacity 0.3s;
-    display: flex; align-items: flex-end; padding: 1.5rem;
-  }
-  .img-wrap:hover .img-overlay { opacity: 1; }
-  .img-expand {
-    font-size: 0.65rem; letter-spacing: 4px; color: var(--silver);
-    text-transform: uppercase;
-  }
-
+  /* Gallery grid */
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 4px;
   }
-  .gallery-grid .img-wrap {
-    overflow: hidden; position: relative; aspect-ratio: 4/3;
-    cursor: none;
+  .gallery-item {
+    aspect-ratio: 4/3; overflow: hidden; cursor: pointer;
+    position: relative;
   }
-  .gallery-grid img {
+  .gallery-item img {
     width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(20%) brightness(0.85);
-    transition: filter 0.5s, transform 0.6s;
+    transition: transform .6s cubic-bezier(.25,.46,.45,.94), filter .4s;
+    filter: brightness(.85) saturate(.9);
   }
-  .gallery-grid .img-wrap:hover img {
-    filter: grayscale(0%) brightness(1);
-    transform: scale(1.08);
+  .gallery-item:hover img { transform: scale(1.05); filter: brightness(1) saturate(1); }
+  .gallery-item::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,.12) 0%, transparent 60%);
+    opacity: 0; transition: opacity .4s;
   }
+  .gallery-item:hover::after { opacity: 1; }
 
-  /* DESTAQUES HERO GRID */
-  .highlights-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: 400px 280px;
-    gap: 8px;
+  /* ─── LIGHTBOX ───────────────────────────────── */
+  #lightbox {
+    display: none; position: fixed; inset: 0; z-index: 5000;
+    background: rgba(0,0,0,.97);
+    align-items: center; justify-content: center;
   }
-  .highlights-grid .h-main {
-    grid-row: 1 / 3;
-    overflow: hidden; position: relative;
+  #lightbox.open { display: flex; }
+  #lightbox img {
+    max-width: 90vw; max-height: 90vh;
+    object-fit: contain;
+    border: 1px solid var(--border);
   }
-  .highlights-grid .h-item {
-    overflow: hidden; position: relative;
+  #lb-close {
+    position: absolute; top: 20px; right: 28px;
+    font-size: 28px; color: var(--silver); cursor: pointer;
+    transition: color .3s; line-height: 1;
   }
-  .highlights-grid img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(30%) brightness(0.8);
-    transition: all 0.6s;
+  #lb-close:hover { color: var(--gold); }
+  #lb-prev, #lb-next {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,.6); border: 1px solid var(--border);
+    color: var(--white); font-size: 24px; width: 52px; height: 52px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all .3s;
   }
-  .highlights-grid .img-wrap:hover img {
-    filter: grayscale(0%) brightness(1);
-    transform: scale(1.05);
-  }
+  #lb-prev:hover, #lb-next:hover { border-color: var(--gold); color: var(--gold); }
+  #lb-prev { left: 20px; }
+  #lb-next { right: 20px; }
 
-  /* INNER PAGES */
+  /* ─── INNER PAGES ────────────────────────────── */
   .page-hero {
-    height: 60vh; position: relative; overflow: hidden;
-    display: flex; align-items: flex-end; padding: 4rem;
+    height: 65vh; position: relative;
+    display: flex; align-items: flex-end;
+    padding-bottom: 60px;
+    overflow: hidden;
   }
   .page-hero-bg {
     position: absolute; inset: 0;
     background-size: cover; background-position: center;
-    filter: brightness(0.25) saturate(0.2);
   }
-  .page-hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent, var(--black) 90%);
+  .page-hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(5,5,5,.9) 0%, rgba(5,5,5,.3) 60%, rgba(5,5,5,.6) 100%);
   }
-  .page-hero-content { position: relative; z-index: 2; }
-  .page-hero-eyebrow {
-    font-size: 0.65rem; letter-spacing: 6px; color: var(--gold);
-    text-transform: uppercase; margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 1rem;
+  .page-hero-content {
+    position: relative; z-index: 2;
+    padding: 0 60px;
   }
-  .page-hero-eyebrow::before {
-    content: ''; display: inline-block; width: 40px; height: 1px;
-    background: var(--gold);
-  }
-  .page-hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 8vw, 7rem);
-    letter-spacing: 2px; line-height: 0.9;
-  }
+  .page-hero-content .section-label { margin-bottom: 8px; }
+  .page-hero-content .section-title { font-size: clamp(48px, 8vw, 100px); }
 
   .page-text-section {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
-    padding: 6rem 4rem; align-items: center;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    padding: 100px 60px; align-items: center;
+    max-width: 1400px; margin: 0 auto;
   }
-  .page-text-section.reverse { direction: rtl; }
-  .page-text-section.reverse > * { direction: ltr; }
-  .page-quote {
-    font-family: var(--font-serif); font-size: clamp(1.1rem, 2vw, 1.6rem);
-    font-style: italic; line-height: 1.8; color: var(--white);
-    position: relative; padding-left: 2rem;
+  .page-text h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px; letter-spacing: 3px;
+    color: var(--white); margin-bottom: 24px;
   }
-  .page-quote::before {
-    content: '"';
-    position: absolute; left: 0; top: -10px;
-    font-size: 5rem; color: var(--border); line-height: 1;
-    font-family: var(--font-serif);
+  .page-text p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; line-height: 1.8; color: var(--light);
+    margin-bottom: 16px;
   }
-  .page-img-feature {
-    position: relative; overflow: hidden;
+  .page-text blockquote {
+    border-left: 2px solid var(--gold);
+    padding-left: 24px; margin: 32px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 22px; color: var(--gold);
   }
-  .page-img-feature img {
-    width: 100%; display: block;
-    filter: grayscale(15%) brightness(0.9);
-    transition: filter 0.6s;
+  .page-photo {
+    position: relative;
   }
-  .page-img-feature:hover img { filter: grayscale(0%) brightness(1); }
-  .page-img-feature::after {
+  .page-photo img {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  }
+  .page-photo::before {
     content: ''; position: absolute;
-    bottom: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(to right, var(--silver), var(--gold));
+    top: -16px; left: -16px; right: 16px; bottom: 16px;
+    border: 1px solid var(--gold); z-index: -1; opacity: .4;
   }
 
-  /* LIGHTBOX */
-  .lightbox {
-    display: none; position: fixed; inset: 0; z-index: 2000;
-    background: rgba(0,0,0,0.96); align-items: center; justify-content: center;
+  /* Page gallery slideshow */
+  .page-gallery { padding: 60px; padding-top: 0; max-width: 1400px; margin: 0 auto; }
+  .page-gallery-title {
+    font-size: 10px; letter-spacing: 6px; color: var(--silver);
+    text-transform: uppercase; margin-bottom: 24px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--border);
   }
-  .lightbox.open { display: flex; }
-  .lightbox img {
-    max-width: 90vw; max-height: 90vh;
-    object-fit: contain; border: 1px solid var(--border);
-  }
-  .lightbox-close {
-    position: absolute; top: 2rem; right: 2rem;
-    background: none; border: 1px solid var(--border);
-    color: var(--silver); font-size: 1.5rem; cursor: pointer;
-    width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-  }
-  .lightbox-close:hover { background: var(--silver); color: var(--black); }
-  .lightbox-nav {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    background: none; border: 1px solid var(--border);
-    color: var(--silver); font-size: 1.5rem; cursor: pointer;
-    width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-  }
-  .lightbox-nav:hover { background: rgba(255,255,255,0.1); }
-  .lightbox-prev { left: 2rem; }
-  .lightbox-next { right: 2rem; }
 
-  /* FOOTER */
+  /* ─── FOOTER ─────────────────────────────────── */
   footer {
+    position: relative; overflow: hidden;
+    padding: 100px 40px 60px;
+    text-align: center;
     border-top: 1px solid var(--border);
-    padding: 4rem;
-    display: grid; grid-template-columns: 1fr auto 1fr;
-    gap: 3rem; align-items: center;
   }
-  .footer-brand .brand-name {
-    font-family: var(--font-display); font-size: 2rem;
-    letter-spacing: 4px; color: var(--white);
+  .footer-bg {
+    position: absolute; inset: 0;
+    background: url('https://i.ibb.co/S7wCFQsw/mockup001.jpg') center/cover no-repeat;
+    opacity: .06;
   }
-  .footer-brand p {
-    font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem;
-    letter-spacing: 2px;
+  .footer-content { position: relative; z-index: 2; }
+  .footer-logo img { height: 70px; margin: 0 auto 24px; }
+  .footer-slogan {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 20px; color: var(--silver);
+    margin-bottom: 40px;
   }
-  .footer-contacts {
-    display: flex; flex-direction: column; gap: 1rem; align-items: center;
+  .footer-divider { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 40px; }
+  .footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+  .footer-link {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--light); text-decoration: none;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    transition: color .3s;
   }
-  .footer-contact-item {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 0.8rem; color: var(--muted);
-    text-decoration: none; transition: color 0.2s;
-    letter-spacing: 1px;
-  }
-  .footer-contact-item:hover { color: var(--silver); }
-  .contact-icon {
-    width: 36px; height: 36px; border: 1px solid var(--border);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem; flex-shrink: 0;
-    transition: all 0.2s;
-  }
-  .footer-contact-item:hover .contact-icon {
-    border-color: var(--silver); background: var(--silver); color: var(--black);
-  }
+  .footer-link:hover { color: var(--gold); }
+  .footer-link svg { width: 18px; height: 18px; }
   .footer-copy {
-    text-align: right;
-    font-size: 0.65rem; color: var(--muted); letter-spacing: 2px;
-    line-height: 1.8;
+    margin-top: 60px; font-size: 10px; letter-spacing: 2px;
+    color: var(--border); text-transform: uppercase;
   }
 
-  /* MIB DIVIDER */
-  .mib-divider {
-    display: flex; align-items: center; gap: 2rem; padding: 0 4rem;
-    margin: 2rem 0;
+  /* ─── MOBILE ─────────────────────────────────── */
+  .hamburger {
+    display: none; background: none; border: 1px solid var(--border);
+    color: var(--white); width: 40px; height: 40px;
+    align-items: center; justify-content: center; cursor: pointer;
+    font-size: 18px;
   }
-  .mib-divider::before, .mib-divider::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
+  .mobile-nav {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(5,5,5,.98); backdrop-filter: blur(20px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 32px;
   }
-  .mib-badge {
-    font-family: var(--font-display); font-size: 0.6rem;
-    letter-spacing: 8px; color: var(--muted); text-transform: uppercase;
-    border: 1px solid var(--border); padding: 6px 16px;
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px; letter-spacing: 4px; color: var(--white);
+    text-decoration: none; transition: color .3s;
   }
+  .mobile-nav a:hover { color: var(--gold); }
+  .mobile-close {
+    position: absolute; top: 24px; right: 24px;
+    background: none; border: none; color: var(--silver);
+    font-size: 28px; cursor: pointer;
+  }
+  .mobile-langs { display: flex; gap: 12px; margin-top: 24px; }
 
-  /* RESPONSIVE */
-  @media (max-width: 1024px) {
-    .gallery-masonry { columns: 2; }
-    .highlights-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .highlights-grid .h-main { grid-row: auto; grid-column: 1 / -1; }
-    .page-text-section { grid-template-columns: 1fr; gap: 3rem; }
-    .page-text-section.reverse { direction: ltr; }
-    footer { grid-template-columns: 1fr; text-align: center; }
-    .footer-copy { text-align: center; }
-  }
-
-  @media (max-width: 768px) {
-    header { padding: 0 1.5rem; }
-    nav { display: none; position: fixed; inset: 0; top: 72px;
-      background: var(--deep); flex-direction: column; justify-content: center;
-      align-items: center; gap: 2rem; z-index: 999;
-    }
-    nav.open { display: flex; }
-    nav a { font-size: 1.2rem; }
+  @media (max-width: 900px) {
+    nav { display: none; }
     .hamburger { display: flex; }
-    .section { padding: 4rem 1.5rem; }
-    .page-hero { padding: 2rem 1.5rem; }
-    .page-text-section { padding: 3rem 1.5rem; }
-    footer { padding: 3rem 1.5rem; }
-    .mib-divider { padding: 0 1.5rem; }
-    .gallery-masonry { columns: 2; }
-    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-    .hero-title { font-size: clamp(3rem, 15vw, 6rem); }
-    .lightbox-prev { left: 0.5rem; }
-    .lightbox-next { right: 0.5rem; }
+    .page-text-section { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+    .section { padding: 60px 24px; }
+    header { padding: 14px 20px; }
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 3px; }
+    .tab-btn { font-size: 9px; padding: 12px 12px; letter-spacing: 2px; }
   }
 
-  @media (max-width: 480px) {
-    .gallery-masonry { columns: 1; }
-    .tabs-nav { flex-wrap: nowrap; }
+  /* ─── LOADING ────────────────────────────────── */
+  #loader {
+    position: fixed; inset: 0; z-index: 99999;
+    background: var(--black);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity .8s, visibility .8s;
+  }
+  #loader.hidden { opacity: 0; visibility: hidden; }
+  .loader-logo { font-family: 'Bebas Neue', sans-serif; font-size: 80px; letter-spacing: 8px; color: var(--white); }
+  .loader-logo span { color: var(--gold); }
+  .loader-bar {
+    width: 200px; height: 1px; background: var(--border);
+    margin-top: 32px; overflow: hidden;
+  }
+  .loader-progress {
+    height: 100%; background: linear-gradient(to right, var(--gold), var(--neon));
+    width: 0; animation: loadProgress 1.8s ease-in-out forwards;
+  }
+  @keyframes loadProgress { to { width: 100%; } }
+
+  /* ─── ANIMATED BORDER ────────────────────────── */
+  .gold-border {
+    position: relative; display: inline-block;
+  }
+  .gold-border::before, .gold-border::after {
+    content: ''; position: absolute;
+    border: 1px solid rgba(201,168,76,.3);
+    animation: borderPulse 3s ease-in-out infinite;
+  }
+  .gold-border::before { inset: -8px; animation-delay: 0s; }
+  .gold-border::after  { inset: -16px; animation-delay: .8s; }
+  @keyframes borderPulse {
+    0%,100% { opacity:.3; transform: scale(1); }
+    50% { opacity:.7; transform: scale(1.01); }
   }
 
-  /* ANIMATIONS ON SCROLL */
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+  /* Contact strip */
+  .contact-strip {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 60px; margin: 0 40px 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 32px;
   }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .contact-strip-text .section-label { margin-bottom: 6px; }
+  .contact-strip-text h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; letter-spacing: 3px;
+  }
+  .contact-strip-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; text-decoration: none;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    transition: all .3s; cursor: pointer;
+  }
+  .btn-gold {
+    background: var(--gold); color: var(--black);
+    border: 1px solid var(--gold);
+  }
+  .btn-gold:hover { background: transparent; color: var(--gold); }
+  .btn-outline {
+    background: transparent; color: var(--light);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* SILVER LINE ACCENT */
-  .silver-line {
-    width: 60px; height: 2px;
-    background: linear-gradient(to right, var(--silver), var(--gold));
-    margin: 1.5rem 0;
+  /* Page gallery overflow slideshow */
+  .hscroll { overflow-x: auto; padding: 20px 0; scroll-behavior: smooth; }
+  .hscroll::-webkit-scrollbar { height: 3px; }
+  .hscroll::-webkit-scrollbar-track { background: var(--border); }
+  .hscroll::-webkit-scrollbar-thumb { background: var(--gold); }
+  .hscroll-inner { display: flex; gap: 6px; width: max-content; }
+  .hscroll-inner img {
+    height: 260px; width: auto; object-fit: cover;
+    cursor: pointer;
+    transition: filter .4s;
+    filter: brightness(.8);
   }
+  .hscroll-inner img:hover { filter: brightness(1); }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">ELAD <span>LYRON</span></div>
+  <div class="loader-bar"><div class="loader-progress"></div></div>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">‹</button>
-  <img id="lightboxImg" src="" alt="">
-  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">›</button>
+<div id="lightbox">
+  <span id="lb-close">&#10005;</span>
+  <button id="lb-prev">&#8592;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">&#8594;</button>
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" onclick="closeMobileNav()">&#10005;</button>
+  <a href="#" onclick="showPage('home');closeMobileNav();" data-i18n="nav_home">Home</a>
+  <a href="#" onclick="showPage('familia');closeMobileNav();" data-i18n="nav_familia">Família</a>
+  <a href="#" onclick="showPage('aniversariante');closeMobileNav();" data-i18n="nav_aniversariante">Aniversariante</a>
+  <a href="#" onclick="showPage('convidados');closeMobileNav();" data-i18n="nav_convidados">Convidados</a>
+  <div class="mobile-langs">
+    <button class="lang-btn active" onclick="setLang('pt');closeMobileNav()">PT</button>
+    <button class="lang-btn" onclick="setLang('fr');closeMobileNav()">FR</button>
+    <button class="lang-btn" onclick="setLang('en');closeMobileNav()">EN</button>
+  </div>
 </div>
 
 <!-- HEADER -->
-<header>
-  <div class="logo-area">
-    <!-- LOGO: substitua o div abaixo por <img src="sua-logo.png" style="height:44px"> -->
-    <div class="logo-placeholder">BK</div>
-    <div>
-      <span class="logo-text">Bru9sk Films</span>
-      <span class="logo-sub">Photography & Film</span>
-    </div>
+<header id="header">
+  <div class="logo-wrap">
+    <img src="https://i.ibb.co/YF8xjXZx/Logo-P002.png" alt="Logo" onerror="this.parentElement.innerHTML='<div class=logo-placeholder>BRU9SK FILMS</div>'">
   </div>
-
-  <nav id="mainNav">
-    <a href="#" class="active" data-page="home" data-i18n="nav_home">Home</a>
-    <a href="#" data-page="familia" data-i18n="nav_familia">Família</a>
-    <a href="#" data-page="aniversariante" data-i18n="nav_aniversariante">Aniversariante</a>
-    <a href="#" data-page="convidados" data-i18n="nav_convidados">Convidados</a>
-  </nav>
-
-  <div style="display:flex;align-items:center;gap:1.5rem">
+  <nav>
+    <a href="#" onclick="showPage('home')" class="active" id="nav-home" data-i18n="nav_home">Home</a>
+    <a href="#" onclick="showPage('familia')" id="nav-familia" data-i18n="nav_familia">Família</a>
+    <a href="#" onclick="showPage('aniversariante')" id="nav-aniversariante" data-i18n="nav_aniversariante">Aniversariante</a>
+    <a href="#" onclick="showPage('convidados')" id="nav-convidados" data-i18n="nav_convidados">Convidados</a>
     <div class="lang-switcher">
       <button class="lang-btn active" onclick="setLang('pt')">PT</button>
       <button class="lang-btn" onclick="setLang('fr')">FR</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+  </nav>
+  <button class="hamburger" onclick="openMobileNav()">&#9776;</button>
 </header>
 
-<!-- ==================== HOME ==================== -->
+<!-- ══════════════════════════════════════════════ -->
+<!--  PAGE: HOME                                   -->
+<!-- ══════════════════════════════════════════════ -->
 <div class="page active" id="page-home">
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-badge" data-i18n="hero_badge">Bar-Mitsvah · Men in Black · 2026</div>
-      <h1 class="hero-title">
-        ELAD<span>LYRON</span>
-      </h1>
-      <p class="hero-subtitle" data-i18n="hero_subtitle">Uma noite que o tempo não apagará</p>
-      <p class="hero-date">18 Avril 2026 · Liège, Belgique</p>
+      <div class="hero-eyebrow" data-i18n="hero_eyebrow">Bar-Mitzvah · Men in Black · 2026</div>
+      <div class="hero-title">ELAD<br><span>LYRON</span></div>
+      <div class="hero-subtitle" data-i18n="hero_subtitle">Uma noite inesquecível registrada para sempre</div>
+      <div class="hero-divider"></div>
+      <div class="hero-date" data-i18n="hero_date">18 de Abril de 2026 · Bar-Mitzvah</div>
     </div>
     <div class="hero-scroll">
-      <span data-i18n="scroll_text">SCROLL</span>
-      <div class="scroll-line"></div>
+      <div class="hero-scroll-line"></div>
+      <span data-i18n="scroll">Scroll</span>
     </div>
   </section>
 
-  <!-- DESTAQUES -->
-  <section class="section reveal">
-    <div class="section-header">
-      <span class="section-number">01</span>
-      <h2 class="section-title" data-i18n="highlights_title">Destaques</h2>
-      <div class="section-line"></div>
+  <!-- HIGHLIGHTS SLIDESHOW -->
+  <section class="highlights-section">
+    <div class="highlights-header">
+      <div class="section-label" data-i18n="highlights_label">Slideshow</div>
+      <div class="section-title" data-i18n="highlights_title">DESTAQUES</div>
+      <div class="section-subtitle" data-i18n="highlights_sub">Os melhores momentos da noite</div>
     </div>
-    <div class="highlights-grid">
-      <div class="img-wrap h-main" onclick="openLightbox('https://i.postimg.cc/XpJ00wLb/Convidados001.jpg',this)">
-        <img src="https://i.postimg.cc/XpJ00wLb/Convidados001.jpg" alt="Destaque">
-        <div class="img-overlay"><span class="img-expand">↗</span></div>
-      </div>
-      <div class="img-wrap h-item" onclick="openLightbox('https://i.postimg.cc/Yh0Dq7Pn/IMG-1245.jpg',this)">
-        <img src="https://i.postimg.cc/Yh0Dq7Pn/IMG-1245.jpg" alt="Destaque">
-        <div class="img-overlay"><span class="img-expand">↗</span></div>
-      </div>
-      <div class="img-wrap h-item" onclick="openLightbox('https://i.postimg.cc/KRgmCPQC/Elad-00.jpg',this)">
-        <img src="https://i.postimg.cc/KRgmCPQC/Elad-00.jpg" alt="Destaque">
-        <div class="img-overlay"><span class="img-expand">↗</span></div>
-      </div>
-      <div class="img-wrap h-item" onclick="openLightbox('https://i.postimg.cc/SJBMn0dn/IMG-1274.jpg',this)">
-        <img src="https://i.postimg.cc/SJBMn0dn/IMG-1274.jpg" alt="Destaque">
-        <div class="img-overlay"><span class="img-expand">↗</span></div>
-      </div>
-      <div class="img-wrap h-item" onclick="openLightbox('https://i.postimg.cc/8sGXr3yb/20260418-195859.jpg',this)">
-        <img src="https://i.postimg.cc/8sGXr3yb/20260418-195859.jpg" alt="Destaque">
-        <div class="img-overlay"><span class="img-expand">↗</span></div>
-      </div>
+    <div class="slideshow-container" id="mainSlideshow">
+      <!-- slides injected by JS -->
+      <button class="slide-arrow prev" onclick="slidePrev('mainSlideshow')">&#8592;</button>
+      <button class="slide-arrow next" onclick="slideNext('mainSlideshow')">&#8594;</button>
+      <div class="slide-nav" id="mainSlideshowDots"></div>
+      <div class="slide-counter"><span id="mainCurrent">1</span> / <span id="mainTotal">9</span></div>
     </div>
   </section>
 
-  <div class="mib-divider">
-    <span class="mib-badge">Men In Black · Universal Protection · Liège 2026</span>
+  <!-- VIGNETTE -->
+  <section class="vignette-section">
+    <div class="vignette-wrap gold-border">
+      <img src="https://i.ibb.co/Rk5XZgpV/Convidados001.png" alt="Vinheta Men in Black">
+    </div>
+  </section>
+
+  <!-- FULL ALBUM TABS -->
+  <section class="gallery-section">
+    <div style="text-align:center; margin-bottom:60px;">
+      <div class="section-label" data-i18n="album_label">Álbum Completo</div>
+      <div class="section-title" data-i18n="album_title">GALERIA</div>
+      <div class="section-subtitle" data-i18n="album_sub">Cada momento, cada emoção</div>
+    </div>
+    <div class="tabs" id="galleryTabs">
+      <button class="tab-btn active" onclick="switchTab('tudo')" data-i18n="tab_tudo">Tudo</button>
+      <button class="tab-btn" onclick="switchTab('familia-tab')" data-i18n="tab_familia">Família</button>
+      <button class="tab-btn" onclick="switchTab('recepcao')" data-i18n="tab_recepcao">Recepção</button>
+      <button class="tab-btn" onclick="switchTab('convidados-tab')" data-i18n="tab_convidados">Convidados</button>
+      <button class="tab-btn" onclick="switchTab('discurso')" data-i18n="tab_discurso">Discurso</button>
+      <button class="tab-btn" onclick="switchTab('pista')" data-i18n="tab_pista">Pista de Dança</button>
+      <button class="tab-btn" onclick="switchTab('decoracao')" data-i18n="tab_decoracao">Decoração</button>
+    </div>
+    <div id="tab-tudo" class="tab-panel active">
+      <div class="gallery-grid" id="grid-tudo"></div>
+    </div>
+    <div id="tab-familia-tab" class="tab-panel">
+      <div class="gallery-grid" id="grid-familia-tab"></div>
+    </div>
+    <div id="tab-recepcao" class="tab-panel">
+      <div class="gallery-grid" id="grid-recepcao"></div>
+    </div>
+    <div id="tab-convidados-tab" class="tab-panel">
+      <div class="gallery-grid" id="grid-convidados-tab"></div>
+    </div>
+    <div id="tab-discurso" class="tab-panel">
+      <div class="gallery-grid" id="grid-discurso"></div>
+    </div>
+    <div id="tab-pista" class="tab-panel">
+      <div class="gallery-grid" id="grid-pista"></div>
+    </div>
+    <div id="tab-decoracao" class="tab-panel">
+      <div class="gallery-grid" id="grid-decoracao"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT STRIP -->
+  <div class="contact-strip">
+    <div class="contact-strip-text">
+      <div class="section-label" data-i18n="contact_label">Contato</div>
+      <h3 data-i18n="contact_title">ENTRE EM CONTATO</h3>
+    </div>
+    <div class="contact-strip-actions">
+      <a href="https://wa.me/455135231" target="_blank" class="btn btn-gold">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="mailto:bru9skfilms@gmail.com" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        Email
+      </a>
+    </div>
   </div>
 
-  <!-- ABAS / TABS -->
-  <section class="section reveal">
-    <div class="section-header">
-      <span class="section-number">02</span>
-      <h2 class="section-title" data-i18n="gallery_title">Galeria</h2>
-      <div class="section-line"></div>
-    </div>
-
-    <div class="tabs-nav">
-      <button class="tab-btn active" onclick="switchTab(this,'tab-familia')" data-i18n="tab_familia">Família</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab-recepcao')" data-i18n="tab_recepcao">Recepção</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab-convidados')" data-i18n="tab_convidados">Convidados</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab-discurso')" data-i18n="tab_discurso">Discurso</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab-pista')" data-i18n="tab_pista">Pista de Dança</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab-decoracao')" data-i18n="tab_decoracao">Decoração</button>
-    </div>
-
-    <!-- TAB: Família -->
-    <div class="tab-content active" id="tab-familia">
-      <div class="gallery-masonry" id="gal-familia"></div>
-    </div>
-    <!-- TAB: Recepção -->
-    <div class="tab-content" id="tab-recepcao">
-      <div class="gallery-masonry" id="gal-recepcao"></div>
-    </div>
-    <!-- TAB: Convidados -->
-    <div class="tab-content" id="tab-convidados">
-      <div class="gallery-masonry" id="gal-convidados"></div>
-    </div>
-    <!-- TAB: Discurso -->
-    <div class="tab-content" id="tab-discurso">
-      <div class="gallery-masonry" id="gal-discurso"></div>
-    </div>
-    <!-- TAB: Pista de Dança -->
-    <div class="tab-content" id="tab-pista">
-      <div class="gallery-masonry" id="gal-pista"></div>
-    </div>
-    <!-- TAB: Decoração -->
-    <div class="tab-content" id="tab-decoracao">
-      <div class="gallery-masonry" id="gal-decoracao"></div>
-    </div>
-  </section>
-
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-brand">
-      <div class="brand-name">BRU9SK</div>
-      <p data-i18n="footer_tagline">Photography & Cinematography</p>
-    </div>
-    <div class="footer-contacts">
-      <a href="https://wa.me/455135231" target="_blank" class="footer-contact-item">
-        <div class="contact-icon">📱</div>
-        <span>+32 455 135 231</span>
-      </a>
-      <a href="mailto:bru9skfilms@gmail.com" class="footer-contact-item">
-        <div class="contact-icon">✉</div>
-        <span>bru9skfilms@gmail.com</span>
-      </a>
-      <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-contact-item">
-        <div class="contact-icon">◈</div>
-        <span>@bru9skfilms</span>
-      </a>
-    </div>
-    <div class="footer-copy">
-      <p>© 2026 Bru9sk Films</p>
-      <p data-i18n="footer_rights">Todos os direitos reservados</p>
-      <p style="margin-top:0.5rem;color:#333">Bar-Mitsvah · Elad Lyron</p>
+    <div class="footer-bg"></div>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="https://i.ibb.co/YF8xjXZx/Logo-P002.png" alt="Logo" onerror="this.style.display='none'">
+      </div>
+      <div class="footer-slogan" data-i18n="footer_slogan">Fotografando memórias que duram para sempre</div>
+      <div class="footer-divider"></div>
+      <div class="footer-links">
+        <a href="https://wa.me/455135231" target="_blank" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          +455 135 231
+        </a>
+        <a href="mailto:bru9skfilms@gmail.com" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          bru9skfilms@gmail.com
+        </a>
+        <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @bru9skfilms
+        </a>
+      </div>
+      <div class="footer-copy">© 2026 Bru9sk Films · Elad Lyron Bar-Mitzvah</div>
     </div>
   </footer>
 </div>
 
-<!-- ==================== FAMÍLIA ==================== -->
+<!-- ══════════════════════════════════════════════ -->
+<!--  PAGE: FAMÍLIA                                -->
+<!-- ══════════════════════════════════════════════ -->
 <div class="page" id="page-familia">
-  <div class="page-hero">
-    <div class="page-hero-bg" style="background-image:url('https://i.postimg.cc/SJBMn0dn/IMG-1274.jpg')"></div>
-    <div class="page-hero-overlay"></div>
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://i.ibb.co/Xr3dBNj3/Familia001.png')"></div>
     <div class="page-hero-content">
-      <p class="page-hero-eyebrow" data-i18n="familia_eyebrow">A força de um clã</p>
-      <h1 class="page-hero-title" data-i18n="nav_familia">Família</h1>
+      <div class="section-label" data-i18n="nav_home">Home</div>
+      <div class="section-title" data-i18n="familia_title">FAMÍLIA</div>
     </div>
-  </div>
-
-  <div class="page-text-section reveal">
-    <div class="page-img-feature">
-      <img src="https://i.postimg.cc/FdRZDg3M/20260418-222427.jpg" alt="Família">
-    </div>
-    <div>
-      <div class="silver-line"></div>
-      <p class="page-quote" data-i18n="familia_quote">
-        A família é o alicerce sobre o qual toda história de vida é erguida. 
-        Neste dia sagrado, cada olhar trocado, cada abraço dado, cada lágrima de alegria 
-        derramada é o testemunho de um amor que atravessa gerações. Elad, você está aqui 
-        porque cada pessoa desta família um dia escolheu estar. E essa escolha é o maior presente.
-      </p>
-    </div>
-  </div>
-
-  <section class="section reveal">
-    <div class="section-header">
-      <span class="section-number">—</span>
-      <h2 class="section-title" data-i18n="all_photos">Todas as Fotos</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="gallery-grid" id="full-familia"></div>
   </section>
 
+  <div class="page-text-section">
+    <div class="page-text">
+      <h2 data-i18n="familia_h2">Os Pilares de Tudo</h2>
+      <p data-i18n="familia_p1">A família é o primeiro lar que conhecemos — o lugar onde aprendemos a amar, a crescer e a nos tornar quem somos. Nesta noite especial, cada abraço, cada sorriso e cada lágrima de emoção contou uma história que vai muito além das palavras.</p>
+      <p data-i18n="familia_p2">Estar rodeado daqueles que nos amam incondicionalmente é o maior presente que a vida pode oferecer. A Bar-Mitzvah de Elad não foi apenas uma celebração — foi a confirmação de que ele nunca estará sozinho nessa jornada.</p>
+      <blockquote data-i18n="familia_quote">"A família é onde a vida começa e o amor nunca termina."</blockquote>
+    </div>
+    <div class="page-photo">
+      <img src="https://i.ibb.co/nsGZbYbS/Familia014.png" alt="Família">
+    </div>
+  </div>
+
+  <div class="page-gallery">
+    <div class="page-gallery-title" data-i18n="gallery_familia">Galeria · Família</div>
+    <div class="hscroll"><div class="hscroll-inner" id="hscroll-familia"></div></div>
+  </div>
+
   <footer>
-    <div class="footer-brand">
-      <div class="brand-name">BRU9SK</div>
-      <p data-i18n="footer_tagline">Photography & Cinematography</p>
-    </div>
-    <div class="footer-contacts">
-      <a href="https://wa.me/455135231" target="_blank" class="footer-contact-item">
-        <div class="contact-icon">📱</div><span>+32 455 135 231</span>
-      </a>
-      <a href="mailto:bru9skfilms@gmail.com" class="footer-contact-item">
-        <div class="contact-icon">✉</div><span>bru9skfilms@gmail.com</span>
-      </a>
-      <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-contact-item">
-        <div class="contact-icon">◈</div><span>@bru9skfilms</span>
-      </a>
-    </div>
-    <div class="footer-copy">
-      <p>© 2026 Bru9sk Films</p>
-      <p data-i18n="footer_rights">Todos os direitos reservados</p>
+    <div class="footer-bg"></div>
+    <div class="footer-content">
+      <div class="footer-logo"><img src="https://i.ibb.co/YF8xjXZx/Logo-P002.png" alt="Logo" onerror="this.style.display='none'"></div>
+      <div class="footer-slogan" data-i18n="footer_slogan">Fotografando memórias que duram para sempre</div>
+      <div class="footer-divider"></div>
+      <div class="footer-links">
+        <a href="https://wa.me/455135231" target="_blank" class="footer-link">WhatsApp</a>
+        <a href="mailto:bru9skfilms@gmail.com" class="footer-link">bru9skfilms@gmail.com</a>
+        <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-link">@bru9skfilms</a>
+      </div>
     </div>
   </footer>
 </div>
 
-<!-- ==================== ANIVERSARIANTE ==================== -->
+<!-- ══════════════════════════════════════════════ -->
+<!--  PAGE: ANIVERSARIANTE                         -->
+<!-- ══════════════════════════════════════════════ -->
 <div class="page" id="page-aniversariante">
-  <div class="page-hero">
-    <div class="page-hero-bg" style="background-image:url('https://i.postimg.cc/hhp3Bv2X/IMG-1247.jpg')"></div>
-    <div class="page-hero-overlay"></div>
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://i.ibb.co/ycjFLPwN/IMG-1354.jpg')"></div>
     <div class="page-hero-content">
-      <p class="page-hero-eyebrow" data-i18n="aniv_eyebrow">O homem da noite</p>
-      <h1 class="page-hero-title">Elad Lyron</h1>
+      <div class="section-label" data-i18n="nav_home">Home</div>
+      <div class="section-title" data-i18n="aniv_title">ELAD LYRON</div>
     </div>
-  </div>
-
-  <div class="page-text-section reverse reveal">
-    <div class="page-img-feature">
-      <img src="https://i.postimg.cc/K4Js2j0Y/IMG-1248.jpg" alt="Elad">
-    </div>
-    <div>
-      <div class="silver-line"></div>
-      <p class="page-quote" data-i18n="aniv_quote">
-        Treze anos. Uma passagem. Um jovem que hoje dá um passo à frente 
-        e diz ao mundo: "Estou pronto." Com elegância digna de um agente secreto 
-        e um coração cheio de sonhos, Elad Lyron entra nesta nova fase da vida 
-        com a graça de quem já sabe que a maior aventura ainda está por vir.
-      </p>
-    </div>
-  </div>
-
-  <section class="section reveal">
-    <div class="section-header">
-      <span class="section-number">—</span>
-      <h2 class="section-title" data-i18n="all_photos">Todas as Fotos</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="gallery-grid" id="full-aniversariante"></div>
   </section>
 
+  <div class="page-text-section">
+    <div class="page-photo">
+      <img src="https://i.ibb.co/yBx2njbW/IMG-1291.jpg" alt="Elad Lyron">
+    </div>
+    <div class="page-text">
+      <h2 data-i18n="aniv_h2">O Protagonista da Noite</h2>
+      <p data-i18n="aniv_p1">Elad Lyron chegou a um dos momentos mais importantes de sua vida com uma elegância única. Vestindo o tema Men in Black com toda a sua personalidade, ele mostrou ao mundo que está pronto para escrever os próximos capítulos de sua história.</p>
+      <p data-i18n="aniv_p2">Com olhos que brilhavam de emoção e um sorriso que iluminava cada canto do salão, Elad celebrou não apenas os seus 13 anos, mas também tudo que construiu com dedicação, fé e amor.</p>
+      <blockquote data-i18n="aniv_quote">"Hoje você não é apenas mais velho — você é maior, mais forte, mais você."</blockquote>
+    </div>
+  </div>
+
+  <div class="page-gallery">
+    <div class="page-gallery-title" data-i18n="gallery_aniv">Galeria · Aniversariante</div>
+    <div class="hscroll"><div class="hscroll-inner" id="hscroll-aniversariante"></div></div>
+  </div>
+
   <footer>
-    <div class="footer-brand">
-      <div class="brand-name">BRU9SK</div>
-      <p data-i18n="footer_tagline">Photography & Cinematography</p>
-    </div>
-    <div class="footer-contacts">
-      <a href="https://wa.me/455135231" target="_blank" class="footer-contact-item">
-        <div class="contact-icon">📱</div><span>+32 455 135 231</span>
-      </a>
-      <a href="mailto:bru9skfilms@gmail.com" class="footer-contact-item">
-        <div class="contact-icon">✉</div><span>bru9skfilms@gmail.com</span>
-      </a>
-      <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-contact-item">
-        <div class="contact-icon">◈</div><span>@bru9skfilms</span>
-      </a>
-    </div>
-    <div class="footer-copy">
-      <p>© 2026 Bru9sk Films</p>
-      <p data-i18n="footer_rights">Todos os direitos reservados</p>
+    <div class="footer-bg"></div>
+    <div class="footer-content">
+      <div class="footer-logo"><img src="https://i.ibb.co/YF8xjXZx/Logo-P002.png" alt="Logo" onerror="this.style.display='none'"></div>
+      <div class="footer-slogan" data-i18n="footer_slogan">Fotografando memórias que duram para sempre</div>
+      <div class="footer-divider"></div>
+      <div class="footer-links">
+        <a href="https://wa.me/455135231" target="_blank" class="footer-link">WhatsApp</a>
+        <a href="mailto:bru9skfilms@gmail.com" class="footer-link">bru9skfilms@gmail.com</a>
+        <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-link">@bru9skfilms</a>
+      </div>
     </div>
   </footer>
 </div>
 
-<!-- ==================== CONVIDADOS ==================== -->
+<!-- ══════════════════════════════════════════════ -->
+<!--  PAGE: CONVIDADOS                             -->
+<!-- ══════════════════════════════════════════════ -->
 <div class="page" id="page-convidados">
-  <div class="page-hero">
-    <div class="page-hero-bg" style="background-image:url('https://i.postimg.cc/KRzyynfR/Convidados002.jpg')"></div>
-    <div class="page-hero-overlay"></div>
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://i.ibb.co/rRVq34cf/Convidados016.jpg')"></div>
     <div class="page-hero-content">
-      <p class="page-hero-eyebrow" data-i18n="conv_eyebrow">Os agentes da noite</p>
-      <h1 class="page-hero-title" data-i18n="nav_convidados">Convidados</h1>
+      <div class="section-label" data-i18n="nav_home">Home</div>
+      <div class="section-title" data-i18n="conv_title">CONVIDADOS</div>
     </div>
-  </div>
-
-  <div class="page-text-section reveal">
-    <div class="page-img-feature">
-      <img src="https://i.postimg.cc/8j5VVh46/Convidados003.jpg" alt="Convidados">
-    </div>
-    <div>
-      <div class="silver-line"></div>
-      <p class="page-quote" data-i18n="conv_quote">
-        Uma celebração só tem sentido quando partilhada. 
-        Cada convidado trouxe consigo uma memória, um sorriso, 
-        uma história que entrelaça para sempre com a noite de Elad. 
-        Unidos pelo mesmo tema, pelo mesmo preto e branco elegante, 
-        foram os agentes da alegria que tornaram esta noite verdadeiramente inesquecível.
-      </p>
-    </div>
-  </div>
-
-  <section class="section reveal">
-    <div class="section-header">
-      <span class="section-number">—</span>
-      <h2 class="section-title" data-i18n="all_photos">Todas as Fotos</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="gallery-grid" id="full-convidados"></div>
   </section>
 
+  <div class="page-text-section">
+    <div class="page-text">
+      <h2 data-i18n="conv_h2">A Alegria de Cada Presença</h2>
+      <p data-i18n="conv_p1">Uma celebração só é verdadeiramente especial quando rodeada das pessoas certas. Cada convidado trouxe consigo uma história, um vínculo, uma parte da trajetória de Elad. Juntos, eles transformaram a noite em algo indescritível.</p>
+      <p data-i18n="conv_p2">Rostos sorridentes, danças sem fim e conversas emocionadas preencheram cada momento. A energia daquela noite foi alimentada pelo amor genuíno de todos que estiveram presentes.</p>
+      <blockquote data-i18n="conv_quote">"A alegria multiplicada é a mais bonita de todas."</blockquote>
+    </div>
+    <div class="page-photo">
+      <img src="https://i.ibb.co/v6JWnDsb/Convidados023.jpg" alt="Convidados">
+    </div>
+  </div>
+
+  <div class="page-gallery">
+    <div class="page-gallery-title" data-i18n="gallery_conv">Galeria · Convidados</div>
+    <div class="hscroll"><div class="hscroll-inner" id="hscroll-convidados"></div></div>
+  </div>
+
   <footer>
-    <div class="footer-brand">
-      <div class="brand-name">BRU9SK</div>
-      <p data-i18n="footer_tagline">Photography & Cinematography</p>
-    </div>
-    <div class="footer-contacts">
-      <a href="https://wa.me/455135231" target="_blank" class="footer-contact-item">
-        <div class="contact-icon">📱</div><span>+32 455 135 231</span>
-      </a>
-      <a href="mailto:bru9skfilms@gmail.com" class="footer-contact-item">
-        <div class="contact-icon">✉</div><span>bru9skfilms@gmail.com</span>
-      </a>
-      <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-contact-item">
-        <div class="contact-icon">◈</div><span>@bru9skfilms</span>
-      </a>
-    </div>
-    <div class="footer-copy">
-      <p>© 2026 Bru9sk Films</p>
-      <p data-i18n="footer_rights">Todos os direitos reservados</p>
+    <div class="footer-bg"></div>
+    <div class="footer-content">
+      <div class="footer-logo"><img src="https://i.ibb.co/YF8xjXZx/Logo-P002.png" alt="Logo" onerror="this.style.display='none'"></div>
+      <div class="footer-slogan" data-i18n="footer_slogan">Fotografando memórias que duram para sempre</div>
+      <div class="footer-divider"></div>
+      <div class="footer-links">
+        <a href="https://wa.me/455135231" target="_blank" class="footer-link">WhatsApp</a>
+        <a href="mailto:bru9skfilms@gmail.com" class="footer-link">bru9skfilms@gmail.com</a>
+        <a href="https://instagram.com/bru9skfilms" target="_blank" class="footer-link">@bru9skfilms</a>
+      </div>
     </div>
   </footer>
 </div>
 
 <script>
-// ==================== DATA ====================
-const PHOTOS = {
-  familia: [
-    'https://i.postimg.cc/FdRZDg3M/20260418-222427.jpg',
-    'https://i.postimg.cc/vgBz3L5s/20260418-222436.jpg',
-    'https://i.postimg.cc/phTZqYz3/20260418-222450.jpg',
-    'https://i.postimg.cc/BL6gMcHw/20260418-222454.jpg',
-    'https://i.postimg.cc/SJBMn0dn/IMG-1274.jpg',
-    'https://i.postimg.cc/qN2CnmDD/IMG-1275.jpg',
-    'https://i.postimg.cc/TKnWmkNH/IMG-1276.jpg',
-    'https://i.postimg.cc/VJXbM7ZX/IMG-1277.jpg',
-    'https://i.postimg.cc/1n7gPb4Q/IMG-1279.jpg',
-    'https://i.postimg.cc/BP8jvN1b/IMG-1280.jpg',
-    'https://i.postimg.cc/bSGZvL2t/IMG-1281.jpg',
-    'https://i.postimg.cc/FkfYKGJb/IMG-1282.jpg',
-    'https://i.postimg.cc/KRMKSqbX/IMG-1283.jpg',
-    'https://i.postimg.cc/ZCd9t7S2/IMG-1322.jpg',
-  ],
-  recepcao: [
-    'https://i.postimg.cc/BtvhZsLf/IMG-1264.jpg',
-    'https://i.postimg.cc/dLbn9yWF/IMG-1272.jpg',
-    'https://i.postimg.cc/QFcmYdPc/IMG-1273.jpg',
-    'https://i.postimg.cc/RWwdpZ8Y/IMG-1287.jpg',
-    'https://i.postimg.cc/xJ8KQfx0/IMG-1299.jpg',
-    'https://i.postimg.cc/vD1WSmxQ/IMG-1311.jpg',
-    'https://i.postimg.cc/Jt9bwWjg/IMG-1312.jpg',
-    'https://i.postimg.cc/fk6x4hxs/IMG-1313.jpg',
-    'https://i.postimg.cc/r07tLSRt/IMG-1321.jpg',
-    'https://i.postimg.cc/SY8YQJc7/IMG-1336.jpg',
-    'https://i.postimg.cc/vD6VtSCX/IMG-1517.jpg',
-    'https://i.postimg.cc/mzdWcwyk/IMG-1284.jpg',
-    'https://i.postimg.cc/jDNT8yRK/IMG-1285.jpg',
-    'https://i.postimg.cc/9DT2xyC6/IMG-1286.jpg',
-    'https://i.postimg.cc/WdrV90TQ/IMG-1300.jpg',
-    'https://i.postimg.cc/k6YLM57V/IMG-1301.jpg',
-    'https://i.postimg.cc/R39kX8P9/IMG-1303.jpg',
-    'https://i.postimg.cc/w3PnS3f6/IMG-1304.jpg',
-    'https://i.postimg.cc/XBy1VcHb/IMG-1305.jpg',
-    'https://i.postimg.cc/QFDY37c0/IMG-1306.jpg',
-    'https://i.postimg.cc/30p9MrRL/IMG-1307.jpg',
-    'https://i.postimg.cc/G9sXTKKw/IMG-1308.jpg',
-    'https://i.postimg.cc/bDS9bYQ2/IMG-1309.jpg',
-    'https://i.postimg.cc/XBMcgMLW/IMG-1310.jpg',
-    'https://i.postimg.cc/svr4Qr1g/IMG-1314.jpg',
-    'https://i.postimg.cc/21jdG7Qr/IMG-1316.jpg',
-    'https://i.postimg.cc/sMnYNGmP/IMG-1318.jpg',
-  ],
-  convidados: [
-    'https://i.postimg.cc/XpJ00wLb/Convidados001.jpg',
-    'https://i.postimg.cc/KRzyynfR/Convidados002.jpg',
-    'https://i.postimg.cc/8j5VVh46/Convidados003.jpg',
-    'https://i.postimg.cc/SJsppWd2/Convidados004.jpg',
-    'https://i.postimg.cc/phxgc8r6/Convidados005.jpg',
-    'https://i.postimg.cc/G9XZz4Cz/Convidados006.jpg',
-    'https://i.postimg.cc/WtNBMMQx/Convidados007.jpg',
-    'https://i.postimg.cc/4nfDzzr0/Convidados008.jpg',
-    'https://i.postimg.cc/JGtSFR7b/Convidados009.jpg',
-    'https://i.postimg.cc/WdgYR3Bv/Convidados010.png',
-    'https://i.postimg.cc/1g0dFtMZ/Convidados011.jpg',
-    'https://i.postimg.cc/sBPLWXKr/Convidados012.jpg',
-    'https://i.postimg.cc/PvJV0Mj9/Convidados013.jpg',
-    'https://i.postimg.cc/HrXvGxqL/Convidados014.jpg',
-    'https://i.postimg.cc/rDxZ6mB4/Convidados015.jpg',
-    'https://i.postimg.cc/FdsTJx7R/Convidados016.jpg',
-    'https://i.postimg.cc/9D51B2rx/Convidados017.jpg',
-    'https://i.postimg.cc/D8bBs0yt/Convidados018.jpg',
-    'https://i.postimg.cc/qNVQGrzZ/Convidados019.jpg',
-    'https://i.postimg.cc/yDmjQGRV/Convidados020.jpg',
-    'https://i.postimg.cc/sGG9pHyB/Convidados021.jpg',
-    'https://i.postimg.cc/Btjg9bFV/Convidados022.jpg',
-    'https://i.postimg.cc/pymZbrjG/Convidados023.jpg',
-    'https://i.postimg.cc/RqWR5hfV/Convidados024.jpg',
-    'https://i.postimg.cc/KKcP98FQ/Convidados025.jpg',
-    'https://i.postimg.cc/1gWpb130/Convidados026.jpg',
-    'https://i.postimg.cc/0MF72GSB/Convidados027.jpg',
-    'https://i.postimg.cc/njgqcKmg/Convidados028.jpg',
-    'https://i.postimg.cc/kBxWqb57/Convidados029.jpg',
-    'https://i.postimg.cc/FYN3RHfk/Convidados030.jpg',
-    'https://i.postimg.cc/TK0mWvmH/Convidados031.jpg',
-  ],
-  discurso: [
-    'https://i.postimg.cc/Dm2kK8Ks/20260418-202435.jpg',
-    'https://i.postimg.cc/c6syNrNK/20260418-202446.jpg',
-    'https://i.postimg.cc/CdFTVzVq/20260418-202449.jpg',
-    'https://i.postimg.cc/0r8RqbqM/20260418-202704.jpg',
-    'https://i.postimg.cc/1ftkf2XQ/20260418-202709.jpg',
-    'https://i.postimg.cc/WhHQr8qn/20260418-202720.jpg',
-    'https://i.postimg.cc/SnYHG9cv/20260418-202817.jpg',
-    'https://i.postimg.cc/PCv0MD14/20260418-202820.jpg',
-    'https://i.postimg.cc/B8xyrGYn/20260418-202859.jpg',
-    'https://i.postimg.cc/qhwF7xdc/20260418-202920.jpg',
-    'https://i.postimg.cc/H8Lh88pb/20260418-202922.jpg',
-    'https://i.postimg.cc/QKMyKKX5/20260418-220129.jpg',
-    'https://i.postimg.cc/2L5KLLzx/20260418-220147.jpg',
-    'https://i.postimg.cc/rzhbXjJN/20260418-221328.jpg',
-    'https://i.postimg.cc/PN6csy46/20260418-221339.jpg',
-    'https://i.postimg.cc/8jjY1vK3/20260418-221457.jpg',
-    'https://i.postimg.cc/kBzpD5Ly/20260418-221502.jpg',
-    'https://i.postimg.cc/nCy3pPQN/IMG-1434.jpg',
-    'https://i.postimg.cc/75Sm6ngR/IMG-1435.jpg',
-    'https://i.postimg.cc/HJH378zw/IMG-1436.jpg',
-    'https://i.postimg.cc/BP8CGTZ0/IMG-1438.jpg',
-    'https://i.postimg.cc/QKBqrQN8/IMG-1439.jpg',
-    'https://i.postimg.cc/Wtt8rvGZ/IMG-1440.jpg',
-    'https://i.postimg.cc/Sjjd8h63/IMG-1442.jpg',
-    'https://i.postimg.cc/LJF3rgcp/IMG-1444.jpg',
-    'https://i.postimg.cc/G4PxrhC6/IMG-1445.jpg',
-    'https://i.postimg.cc/bZ098NPp/IMG-1447.jpg',
-    'https://i.postimg.cc/xXG3YTQY/IMG-1452.jpg',
-    'https://i.postimg.cc/grfVZ6kc/IMG-1455.jpg',
-    'https://i.postimg.cc/VdnjBLd7/IMG-1461.jpg',
-    'https://i.postimg.cc/HrmbSDMd/IMG-1522.jpg',
-    'https://i.postimg.cc/vcfWLHch/IMG-1528.jpg',
-    'https://i.postimg.cc/tZ8xWLbB/IMG-1530.jpg',
-    'https://i.postimg.cc/WqrJnXbL/IMG-1531.jpg',
-    'https://i.postimg.cc/XBFy8Q7q/IMG-1533.jpg',
-  ],
-  pista: [
-    'https://i.postimg.cc/8sGXr3yb/20260418-195859.jpg',
-    'https://i.postimg.cc/bdPV2M6V/20260418-195904.jpg',
-    'https://i.postimg.cc/fksq0FHr/20260418-195907.jpg',
-    'https://i.postimg.cc/ThxNWSks/20260418-195910.jpg',
-    'https://i.postimg.cc/PPr6SDnK/20260418-195921.jpg',
-    'https://i.postimg.cc/w7TWwNY4/20260418-195924.jpg',
-    'https://i.postimg.cc/QH4fwMjS/20260418-200044.jpg',
-    'https://i.postimg.cc/CzLvc8pN/20260418-200045.jpg',
-    'https://i.postimg.cc/fJ28pbww/20260418-200050.jpg',
-    'https://i.postimg.cc/nXX3JtzD/20260418-200153.jpg',
-    'https://i.postimg.cc/mPPmsGD3/20260418-200158.jpg',
-    'https://i.postimg.cc/w1n0xbym/20260418-200208.jpg',
-    'https://i.postimg.cc/rD7QyYR6/20260418-200212.jpg',
-    'https://i.postimg.cc/2bDGhbx3/20260418-200220.jpg',
-    'https://i.postimg.cc/wyp2Lykm/20260418-200358.jpg',
-    'https://i.postimg.cc/5YVgLYmn/20260418-200450.jpg',
-    'https://i.postimg.cc/0M0ffktX/20260418-200457.jpg',
-    'https://i.postimg.cc/zHDk2sM4/20260418-200611.jpg',
-    'https://i.postimg.cc/6TBzQZqN/20260418-200841.jpg',
-    'https://i.postimg.cc/9zc1f9MS/20260418-200848.jpg',
-    'https://i.postimg.cc/yWnj3N3d/20260418-200931.jpg',
-    'https://i.postimg.cc/RqvG0thZ/20260418-200936.jpg',
-    'https://i.postimg.cc/ykdPmz03/20260418-201101.jpg',
-    'https://i.postimg.cc/zVBjC1Tn/20260418-201220.jpg',
-    'https://i.postimg.cc/PPx4Wk17/dance001.png',
-    'https://i.postimg.cc/ZCMLjDLM/Dance002.png',
-    'https://i.postimg.cc/SnYfP7T6/Dance003.png',
-    'https://i.postimg.cc/svXcYRpF/Dance004.jpg',
-    'https://i.postimg.cc/3yMFQ4Vc/Dance005.png',
-    'https://i.postimg.cc/8F8mgJ9Y/Dance006.png',
-  ],
-  decoracao: [
-    'https://i.postimg.cc/p9Wk5BSM/20260418-181402.jpg',
-    'https://i.postimg.cc/fkGKfsPm/20260418-181408.jpg',
-    'https://i.postimg.cc/vc5vPjRK/20260418-181419.jpg',
-    'https://i.postimg.cc/cKFhRnqs/20260418-181543.jpg',
-    'https://i.postimg.cc/RqYMPs1Y/20260418-182445.jpg',
-    'https://i.postimg.cc/9zkWx8Ps/20260418-182457.jpg',
-    'https://i.postimg.cc/KRgmCPQC/Elad-00.jpg',
-    'https://i.postimg.cc/vgNdNTnb/Elad-00-1.jpg',
-    'https://i.postimg.cc/xJ4S48mq/IMG-1227.jpg',
-    'https://i.postimg.cc/Ty2M2gqf/IMG-1229.jpg',
-    'https://i.postimg.cc/3yr5rmCx/IMG-1231.jpg',
-    'https://i.postimg.cc/fVKpPk4H/IMG-1232.jpg',
-    'https://i.postimg.cc/47Mr1MCQ/IMG-1234.jpg',
-    'https://i.postimg.cc/DW0jYgPd/IMG-1235.jpg',
-    'https://i.postimg.cc/D83Ny1nN/IMG-1236.jpg',
-    'https://i.postimg.cc/wRX0sb96/IMG-1237.jpg',
-    'https://i.postimg.cc/RJ7Xnb4j/IMG-1238.jpg',
-    'https://i.postimg.cc/NyZ4Cw0V/IMG-1240.jpg',
-    'https://i.postimg.cc/t735kwH0/IMG-1242.jpg',
-    'https://i.postimg.cc/qzmZcS8v/IMG-1244.jpg',
-    'https://i.postimg.cc/QKhcvNZy/IMG-1251.jpg',
-    'https://i.postimg.cc/569RCbQZ/IMG-1252.jpg',
-    'https://i.postimg.cc/S27gnvyw/IMG-1254.jpg',
-    'https://i.postimg.cc/Z0bcfjY5/IMG-1255.jpg',
-    'https://i.postimg.cc/2qNdn79g/IMG-1511.jpg',
-    'https://i.postimg.cc/XZ6K9kDp/IMG-1512.jpg',
-    'https://i.postimg.cc/QKCcj4Vk/IMG-1513.jpg',
-    'https://i.postimg.cc/R6snp7GL/IMG-1514.jpg',
-    'https://i.postimg.cc/vc66X6nf/IMG-1515.jpg',
-    'https://i.postimg.cc/PCWvns2t/IMG-1516.jpg',
-    'https://i.postimg.cc/B8qbWmh7/IMG-1256.jpg',
-    'https://i.postimg.cc/Ff9ztTWm/IMG-1259.jpg',
-    'https://i.postimg.cc/QFZVm8cr/IMG-1260.jpg',
-    'https://i.postimg.cc/2qzyp0Hw/IMG-1263.jpg',
+// ─── DATA ─────────────────────────────────────────────────────────
+const photos = {
+  highlights: [
+    'https://i.ibb.co/5Wg2PgK2/d001.jpg',
+    'https://i.ibb.co/pByMHmCL/d002.jpg',
+    'https://i.ibb.co/HTJrZF5v/d003.jpg',
+    'https://i.ibb.co/Mkndd96W/d004.jpg',
+    'https://i.ibb.co/RpKnw9Gs/d006.jpg',
+    'https://i.ibb.co/k2NLxhRN/d007.jpg',
+    'https://i.ibb.co/zWpF71T8/d008.jpg',
+    'https://i.ibb.co/N2V49VkT/d009.jpg',
+    'https://i.ibb.co/ynxCGsy4/d016.jpg'
   ],
   aniversariante: [
-    'https://i.postimg.cc/Yh0Dq7Pn/IMG-1245.jpg',
-    'https://i.postimg.cc/hhp3Bv2X/IMG-1247.jpg',
-    'https://i.postimg.cc/K4Js2j0Y/IMG-1248.jpg',
-    'https://i.postimg.cc/crCk4Wzv/IMG-1249.jpg',
-    'https://i.postimg.cc/hJLp3tJj/IMG-1250.jpg',
-    'https://i.postimg.cc/cgdXqGYd/IMG-1289.jpg',
-    'https://i.postimg.cc/k67frP8D/IMG-1291.jpg',
-    'https://i.postimg.cc/xJ9trVHm/IMG-1292.jpg',
-    'https://i.postimg.cc/N2MDM8dy/IMG-1297.jpg',
-    'https://i.postimg.cc/6T5YYwtY/IMG-1298.jpg',
-    'https://i.postimg.cc/XX7QQ34x/IMG-1338.jpg',
-    'https://i.postimg.cc/NLfppYQj/IMG-1339.jpg',
-    'https://i.postimg.cc/zLrkWYxc/IMG-1340.jpg',
-    'https://i.postimg.cc/GBCjYnXF/IMG-1341.jpg',
-    'https://i.postimg.cc/67XhRxMd/IMG-1342.jpg',
-    'https://i.postimg.cc/B80CDfmy/IMG-1343.jpg',
-    'https://i.postimg.cc/bZX0cjc4/IMG-1344.jpg',
-    'https://i.postimg.cc/G40Pw1nh/IMG-1345.jpg',
-    'https://i.postimg.cc/zynCqPq7/IMG-1346.jpg',
-    'https://i.postimg.cc/R34chQ08/IMG-1348.jpg',
-    'https://i.postimg.cc/sQ0STk4L/IMG-1349.jpg',
-    'https://i.postimg.cc/YGygd5xc/IMG-1350.jpg',
-    'https://i.postimg.cc/VrHMKxF1/IMG-1353.jpg',
-    'https://i.postimg.cc/gXBRgCKm/IMG-1354.jpg',
-    'https://i.postimg.cc/rz3xxLmN/IMG-1355.jpg',
-    'https://i.postimg.cc/F7Scxnd8/IMG-1356.jpg',
-    'https://i.postimg.cc/PCkDVz1n/IMG-1357.jpg',
-    'https://i.postimg.cc/WhZr7fFQ/IMG-1358.jpg',
-    'https://i.postimg.cc/JypBhfvy/IMG-1359.jpg',
-    'https://i.postimg.cc/2b3LLHNw/IMG-1360.jpg',
-    'https://i.postimg.cc/47nHH8TZ/IMG-1361.jpg',
-    'https://i.postimg.cc/WFKFGM2D/IMG-1362.jpg',
-    'https://i.postimg.cc/NL32L7J4/IMG-1363.jpg',
-    'https://i.postimg.cc/14kV4cCT/IMG-1364.jpg',
-    'https://i.postimg.cc/YhQGFGTM/IMG-1365.jpg',
-    'https://i.postimg.cc/cvZKB1NY/IMG-1366.jpg',
-    'https://i.postimg.cc/9Rv0RCp2/IMG-1367.jpg',
-    'https://i.postimg.cc/CBW5BSN5/IMG-1368.jpg',
-    'https://i.postimg.cc/tZLJZp5V/IMG-1369.jpg',
-    'https://i.postimg.cc/LYr5Y2Tz/IMG-1370.jpg',
-    'https://i.postimg.cc/k2f5Nxcf/IMG-1371.jpg',
-    'https://i.postimg.cc/xXtdGKR4/IMG-1372.jpg',
-    'https://i.postimg.cc/CRmKCjNJ/IMG-1373.jpg',
-    'https://i.postimg.cc/LJNskzTQ/IMG-1374.jpg',
-    'https://i.postimg.cc/tn3qsPJm/IMG-1375.jpg',
-    'https://i.postimg.cc/F13sCtp7/IMG-1376.jpg',
-    'https://i.postimg.cc/64rW8RqD/IMG-1377.jpg',
-    'https://i.postimg.cc/zHZDDpzn/IMG-1378.jpg',
+    'https://i.ibb.co/9HjKZpmW/IMG-1248.jpg','https://i.ibb.co/d0RLDQDV/IMG-1247.jpg',
+    'https://i.ibb.co/vxc0Gc0X/IMG-1250.jpg','https://i.ibb.co/yBx2njbW/IMG-1291.jpg',
+    'https://i.ibb.co/CK178tgK/IMG-1292.jpg','https://i.ibb.co/fz1N5vVv/IMG-1297.jpg',
+    'https://i.ibb.co/5gC2FcNb/IMG-1338.jpg','https://i.ibb.co/8LHt4HyX/IMG-1340.jpg',
+    'https://i.ibb.co/qL17pywN/IMG-1341.jpg','https://i.ibb.co/cc20rnnK/IMG-1343.jpg',
+    'https://i.ibb.co/TBPHxbCr/IMG-1344.jpg','https://i.ibb.co/S41HKgRG/IMG-1345.jpg',
+    'https://i.ibb.co/3Y7mk7MG/IMG-1346.jpg','https://i.ibb.co/S4WV7FM3/IMG-1349.jpg',
+    'https://i.ibb.co/ycjFLPwN/IMG-1354.jpg','https://i.ibb.co/9k4VxCft/IMG-1357.jpg',
+    'https://i.ibb.co/MWXgR0Z/IMG-1358.jpg','https://i.ibb.co/MkmFYhP5/IMG-1359.jpg',
+    'https://i.ibb.co/CT4NfLC/IMG-1361.jpg','https://i.ibb.co/vCJLypcp/IMG-1364.jpg',
+    'https://i.ibb.co/8gYXFrzq/IMG-1365.jpg','https://i.ibb.co/7TdyhyP/IMG-1366.jpg',
+    'https://i.ibb.co/CswWfKdL/IMG-1367.jpg','https://i.ibb.co/JFFML93b/IMG-1372.jpg',
+    'https://i.ibb.co/rG348m9g/IMG-1382.jpg','https://i.ibb.co/xtFGKFHn/IMG-1384.jpg',
+    'https://i.ibb.co/XxSsx1mS/IMG-1391.jpg','https://i.ibb.co/Jj8YhMJd/IMG-1400.jpg'
+  ],
+  convidados: [
+    'https://i.ibb.co/fzvWyMdj/Convidados001.jpg','https://i.ibb.co/Z63nYy1h/Convidados002.jpg',
+    'https://i.ibb.co/XrZ93bLX/Convidados003.jpg','https://i.ibb.co/Q3524RgP/Convidados004.jpg',
+    'https://i.ibb.co/hx0J97RH/Convidados005.jpg','https://i.ibb.co/d0CFJydD/Convidados006.jpg',
+    'https://i.ibb.co/jkvzhBpW/Convidados007.jpg','https://i.ibb.co/93ZgbHMy/Convidados008.jpg',
+    'https://i.ibb.co/nMTPqNpL/Convidados009.jpg','https://i.ibb.co/qLtwjx5w/Convidados011.jpg',
+    'https://i.ibb.co/0jTGhPLM/Convidados010.png','https://i.ibb.co/Y4sPHtgS/Convidados012.jpg',
+    'https://i.ibb.co/whQkvLZf/Convidados013.jpg','https://i.ibb.co/3yLvppJr/Convidados014.jpg',
+    'https://i.ibb.co/hxvRkWjy/Convidados015.jpg','https://i.ibb.co/rRVq34cf/Convidados016.jpg',
+    'https://i.ibb.co/CKcj20xT/Convidados017.jpg','https://i.ibb.co/snqFcMD/Convidados018.jpg',
+    'https://i.ibb.co/KcvWJ0rY/Convidados019.jpg','https://i.ibb.co/spPG2jYM/Convidados020.jpg',
+    'https://i.ibb.co/SwqmC9Qr/Convidados021.jpg','https://i.ibb.co/39ktrW10/Convidados022.jpg',
+    'https://i.ibb.co/v6JWnDsb/Convidados023.jpg','https://i.ibb.co/k6vx8tss/Convidados024.jpg',
+    'https://i.ibb.co/zhGJgLPw/Convidados025.jpg','https://i.ibb.co/RkKPDCCt/Convidados026.jpg',
+    'https://i.ibb.co/hR4YMCQN/Convidados027.jpg','https://i.ibb.co/Y4TZW1J6/Convidados028.jpg',
+    'https://i.ibb.co/xtDhZg5T/Convidados029.jpg','https://i.ibb.co/nsZhmsmH/Convidados030.jpg',
+    'https://i.ibb.co/v6Vy0LHK/Convidados031.jpg'
+  ],
+  decoracao: [
+    'https://i.ibb.co/Zpnnz4PS/20260418-181402.jpg','https://i.ibb.co/hFq9zqL5/20260418-181408.jpg',
+    'https://i.ibb.co/NnN2kDK9/20260418-181543.jpg','https://i.ibb.co/Y4Tspm2k/20260418-181419.jpg',
+    'https://i.ibb.co/zTwWZ3mB/20260418-181816.jpg','https://i.ibb.co/Gv1Y9fHP/20260418-181810.jpg',
+    'https://i.ibb.co/Q7fqZCwX/20260418-181828.jpg','https://i.ibb.co/MkzNj9Kh/20260418-181837.jpg',
+    'https://i.ibb.co/cKdvxxBq/20260418-182445.jpg','https://i.ibb.co/wN9Sj9Mk/20260418-182457.jpg',
+    'https://i.ibb.co/d0Vdzw78/Elad-00.jpg','https://i.ibb.co/whjM9hPf/IMG-1227.jpg',
+    'https://i.ibb.co/JwmWQtmD/Elad-00-1.jpg','https://i.ibb.co/6c6VvZdD/IMG-1229.jpg',
+    'https://i.ibb.co/gL4BgB03/IMG-1231.jpg','https://i.ibb.co/cS7Qxr0w/IMG-1234.jpg',
+    'https://i.ibb.co/zh8115k7/IMG-1232.jpg','https://i.ibb.co/CKQyP75M/IMG-1236.jpg',
+    'https://i.ibb.co/ZD8LQKg/IMG-1235.jpg','https://i.ibb.co/BHgDD02Q/IMG-1238.jpg',
+    'https://i.ibb.co/XkJLrZT3/IMG-1237.jpg','https://i.ibb.co/Zp3Jx4xy/IMG-1240.jpg',
+    'https://i.ibb.co/1tNpW8Zy/IMG-1244.jpg','https://i.ibb.co/CFrgtw2/IMG-1251.jpg',
+    'https://i.ibb.co/mVbmqSSY/IMG-1252.jpg','https://i.ibb.co/hJvpzLh6/IMG-1254.jpg',
+    'https://i.ibb.co/67bYQsxW/IMG-1255.jpg','https://i.ibb.co/j9zwBdd4/IMG-1511.jpg',
+    'https://i.ibb.co/GvxPRNtx/IMG-1512.jpg','https://i.ibb.co/whQ4gV39/IMG-1513.jpg',
+    'https://i.ibb.co/5ZJK7fY/IMG-1514.jpg','https://i.ibb.co/Gqvt0qz/IMG-1515.jpg',
+    'https://i.ibb.co/7JyzbNtN/IMG-1516.jpg','https://i.ibb.co/HL9gbmZP/IMG-1257.jpg',
+    'https://i.ibb.co/pFQ1k5t/IMG-1256.jpg','https://i.ibb.co/WpP4z0h2/IMG-1260.jpg',
+    'https://i.ibb.co/S4KMZB6W/IMG-1263.jpg'
+  ],
+  recepcao: [
+    'https://i.ibb.co/hFYNHgpy/IMG-1285.jpg','https://i.ibb.co/Ndn36gqB/IMG-1284.jpg',
+    'https://i.ibb.co/Y5wZPNv/IMG-1286.jpg','https://i.ibb.co/27w7wFXH/IMG-1300.jpg',
+    'https://i.ibb.co/GQ7ZfVM2/IMG-1301.jpg','https://i.ibb.co/G49SrC2y/IMG-1302.jpg',
+    'https://i.ibb.co/KcmLnxX0/IMG-1303.jpg','https://i.ibb.co/pvfkrxqT/IMG-1304.jpg',
+    'https://i.ibb.co/Fk7hxxyb/IMG-1305.jpg','https://i.ibb.co/YTwWHwqh/IMG-1306.jpg',
+    'https://i.ibb.co/dJp1v8Rd/IMG-1307.jpg','https://i.ibb.co/Dgf76ZXM/IMG-1308.jpg',
+    'https://i.ibb.co/n8trk8mD/IMG-1309.jpg','https://i.ibb.co/q3JTFBDT/IMG-1310.jpg',
+    'https://i.ibb.co/prxv9rMv/IMG-1314.jpg','https://i.ibb.co/C3FLtgxC/IMG-1316.jpg',
+    'https://i.ibb.co/hRJtrJMh/IMG-1318.jpg','https://i.ibb.co/FkC0gwmJ/20260418-190205.jpg',
+    'https://i.ibb.co/ZRdZHc4z/20260418-190234.jpg','https://i.ibb.co/MDCKgJ6d/20260418-190238.jpg',
+    'https://i.ibb.co/vxDmQrQs/20260418-195851.jpg','https://i.ibb.co/bnwdFL8/IMG-1323.jpg',
+    'https://i.ibb.co/Nv3hJnJ/IMG-1324.jpg','https://i.ibb.co/ZRqc0J31/IMG-1325.jpg',
+    'https://i.ibb.co/GfJDdggv/IMG-1329.jpg','https://i.ibb.co/wFWJ69LY/IMG-1330.jpg',
+    'https://i.ibb.co/DfyzP2b3/IMG-1331.jpg','https://i.ibb.co/Mxg4g2b0/IMG-1332.jpg',
+    'https://i.ibb.co/84mn6R5h/IMG-1333.jpg','https://i.ibb.co/Mkn7M0W8/IMG-1334.jpg',
+    'https://i.ibb.co/jPsTPskj/IMG-1337.jpg','https://i.ibb.co/Rkz1wMBH/IMG-1264.jpg',
+    'https://i.ibb.co/67NK7c1k/IMG-1272.jpg','https://i.ibb.co/zhMnwtph/IMG-1273.jpg',
+    'https://i.ibb.co/nNFf4G2n/IMG-1287.jpg','https://i.ibb.co/6JN5sBZc/IMG-1299.jpg',
+    'https://i.ibb.co/9kcbw7Js/IMG-1311.jpg','https://i.ibb.co/V060zpKm/IMG-1312.jpg',
+    'https://i.ibb.co/k2d4nTZ8/IMG-1313.jpg','https://i.ibb.co/5ggrZZ1H/IMG-1321.jpg',
+    'https://i.ibb.co/Ps71cTQ6/IMG-1336.jpg'
+  ],
+  pista: [
+    'https://i.ibb.co/0pFnCS9s/20260418-195859.jpg','https://i.ibb.co/xkntxtr/20260418-195904.jpg',
+    'https://i.ibb.co/Nd4b3v50/20260418-195907.jpg','https://i.ibb.co/9HYKg6rY/20260418-195910.jpg',
+    'https://i.ibb.co/d09YZdqn/20260418-195921.jpg','https://i.ibb.co/bgMGRV7m/20260418-195924.jpg',
+    'https://i.ibb.co/KjKg6sK7/20260418-200045.jpg','https://i.ibb.co/BHrJGksG/20260418-200044.jpg',
+    'https://i.ibb.co/3Y5pwLYQ/20260418-200050.jpg','https://i.ibb.co/gbdx703t/20260418-200153.jpg',
+    'https://i.ibb.co/gMDYGJqF/20260418-200158.jpg','https://i.ibb.co/4Rwh2zZY/20260418-200208.jpg',
+    'https://i.ibb.co/HDgWSVrN/20260418-200212.jpg','https://i.ibb.co/274x6V1p/20260418-200358.jpg',
+    'https://i.ibb.co/Df4S830t/20260418-200220.jpg','https://i.ibb.co/KzQyNQR4/20260418-200450.jpg',
+    'https://i.ibb.co/XxRS5nT7/20260418-200457.jpg','https://i.ibb.co/671VCCSf/20260418-200611.jpg',
+    'https://i.ibb.co/8LZqJ4bQ/20260418-200848.jpg','https://i.ibb.co/Pv2b0JRR/20260418-200841.jpg',
+    'https://i.ibb.co/PsRZgWDV/20260418-200936.jpg','https://i.ibb.co/zTx08PCM/20260418-200931.jpg',
+    'https://i.ibb.co/PZXP26y5/20260418-201101.jpg','https://i.ibb.co/YTcs14Cc/20260418-201220.jpg',
+    'https://i.ibb.co/RkVtVmmW/dance001.png','https://i.ibb.co/rGpWTq0w/Dance002.png',
+    'https://i.ibb.co/JFkBytfX/Dance004.jpg','https://i.ibb.co/dzcjwvP/Dance003.png',
+    'https://i.ibb.co/9HM6xtHr/Dance005.png','https://i.ibb.co/nqJQYVcp/Dance006.png'
+  ],
+  familia: [
+    'https://i.ibb.co/sd54BZ3y/20260418-222436.jpg','https://i.ibb.co/xqqpj2wJ/20260418-222427.jpg',
+    'https://i.ibb.co/KpdkXSqr/20260418-222450.jpg','https://i.ibb.co/cchLcNfp/20260418-222454.jpg',
+    'https://i.ibb.co/C5xvDmsL/IMG-1274.jpg','https://i.ibb.co/PsHH8C0X/IMG-1275.jpg',
+    'https://i.ibb.co/nMHFpQ2j/IMG-1276.jpg','https://i.ibb.co/Y4RPTFZN/IMG-1277.jpg',
+    'https://i.ibb.co/DxZVJNF/IMG-1279.jpg','https://i.ibb.co/gMynmFb1/IMG-1280.jpg',
+    'https://i.ibb.co/NgQLGd0G/IMG-1281.jpg','https://i.ibb.co/mrrhhPDG/IMG-1282.jpg',
+    'https://i.ibb.co/tpTDb3nn/IMG-1283.jpg','https://i.ibb.co/RTXsYYJh/IMG-1322.jpg',
+    'https://i.ibb.co/Xr3dBNj3/Familia001.png'
+  ],
+  discurso: [
+    'https://i.ibb.co/Y4tmr207/20260418-202446.jpg','https://i.ibb.co/pvLhBSF2/20260418-202435.jpg',
+    'https://i.ibb.co/YTKP6WWM/20260418-202704.jpg','https://i.ibb.co/vC0h06VZ/20260418-202449.jpg',
+    'https://i.ibb.co/20D0BHBy/20260418-202709.jpg','https://i.ibb.co/zVLBgMV1/20260418-202720.jpg',
+    'https://i.ibb.co/zW0pWVgT/20260418-202817.jpg','https://i.ibb.co/vC4rynVS/20260418-202820.jpg',
+    'https://i.ibb.co/nNGxM84S/20260418-202859.jpg','https://i.ibb.co/JjC50kyy/20260418-202920.jpg',
+    'https://i.ibb.co/JW6dw3Mr/20260418-202922.jpg','https://i.ibb.co/60nmZP9Y/20260418-220129.jpg',
+    'https://i.ibb.co/Nd5rS5XW/20260418-220147.jpg','https://i.ibb.co/3b698LW/20260418-221328.jpg',
+    'https://i.ibb.co/twjPtzfX/20260418-221339.jpg','https://i.ibb.co/j9wQFBBN/20260418-221357.jpg',
+    'https://i.ibb.co/zTjH4C8S/20260418-221502.jpg','https://i.ibb.co/wFkmJwRK/20260418-221457.jpg',
+    'https://i.ibb.co/d1c6KF6/20260418-225902.jpg','https://i.ibb.co/3YGzT0JP/20260418-225911.jpg',
+    'https://i.ibb.co/27Rmw3tB/IMG-1434.jpg','https://i.ibb.co/7dVZbHpy/IMG-1435.jpg',
+    'https://i.ibb.co/9993mPwX/IMG-1436.jpg','https://i.ibb.co/gM2CKDw5/IMG-1438.jpg',
+    'https://i.ibb.co/mdZCK5p/IMG-1439.jpg','https://i.ibb.co/pBfYKxkY/IMG-1440.jpg',
+    'https://i.ibb.co/pvGBD499/IMG-1442.jpg','https://i.ibb.co/BMghrzN/IMG-1444.jpg',
+    'https://i.ibb.co/Zz7p6q9y/IMG-1445.jpg','https://i.ibb.co/7xBnx1JJ/IMG-1447.jpg',
+    'https://i.ibb.co/DDTFtM53/IMG-1452.jpg','https://i.ibb.co/VcWgtvPD/IMG-1455.jpg',
+    'https://i.ibb.co/35K3cxz2/IMG-1461.jpg','https://i.ibb.co/v6gpqc0d/IMG-1522.jpg',
+    'https://i.ibb.co/nsfWLdbD/IMG-1528.jpg','https://i.ibb.co/5hHQ5Cmz/IMG-1530.jpg',
+    'https://i.ibb.co/Ng21c1nJ/IMG-1531.jpg','https://i.ibb.co/W4ybHB3p/IMG-1533.jpg',
+    'https://i.ibb.co/FbjkTm7y/IMG-1542.jpg','https://i.ibb.co/4ZryGjB2/IMG-1544.jpg',
+    'https://i.ibb.co/FqsxsMJm/IMG-1551.jpg','https://i.ibb.co/gF4YKLM6/IMG-1554.jpg',
+    'https://i.ibb.co/xtPX6L9T/IMG-1555.jpg','https://i.ibb.co/4n60Zfk5/IMG-1557.jpg',
+    'https://i.ibb.co/27KKWxTc/IMG-1559.jpg','https://i.ibb.co/v6WxXgY1/IMG-1560.jpg',
+    'https://i.ibb.co/TqkCjhVx/IMG-1566.jpg','https://i.ibb.co/4wKHhfsr/IMG-1567.jpg'
   ]
 };
 
-// ==================== I18N ====================
-const TRANSLATIONS = {
+// ─── TRANSLATIONS ─────────────────────────────────────────────────
+const i18n = {
   pt: {
-    nav_home: 'Home', nav_familia: 'Família', nav_aniversariante: 'Aniversariante', nav_convidados: 'Convidados',
-    hero_badge: 'Bar-Mitsvah · Men in Black · 2026',
-    hero_subtitle: 'Uma noite que o tempo não apagará',
-    scroll_text: 'SCROLL',
-    highlights_title: 'Destaques',
-    gallery_title: 'Galeria',
-    tab_familia: 'Família', tab_recepcao: 'Recepção', tab_convidados: 'Convidados',
-    tab_discurso: 'Discurso', tab_pista: 'Pista de Dança', tab_decoracao: 'Decoração',
-    familia_eyebrow: 'A força de um clã',
-    familia_quote: 'A família é o alicerce sobre o qual toda história de vida é erguida. Neste dia sagrado, cada olhar trocado, cada abraço dado, cada lágrima de alegria derramada é o testemunho de um amor que atravessa gerações. Elad, você está aqui porque cada pessoa desta família um dia escolheu estar. E essa escolha é o maior presente.',
-    aniv_eyebrow: 'O homem da noite',
-    aniv_quote: 'Treze anos. Uma passagem. Um jovem que hoje dá um passo à frente e diz ao mundo: "Estou pronto." Com elegância digna de um agente secreto e um coração cheio de sonhos, Elad Lyron entra nesta nova fase da vida com a graça de quem já sabe que a maior aventura ainda está por vir.',
-    conv_eyebrow: 'Os agentes da noite',
-    conv_quote: 'Uma celebração só tem sentido quando partilhada. Cada convidado trouxe consigo uma memória, um sorriso, uma história que entrelaça para sempre com a noite de Elad. Unidos pelo mesmo tema, pelo mesmo preto e branco elegante, foram os agentes da alegria que tornaram esta noite verdadeiramente inesquecível.',
-    all_photos: 'Todas as Fotos',
-    footer_tagline: 'Photography & Cinematography',
-    footer_rights: 'Todos os direitos reservados',
+    nav_home:'Home', nav_familia:'Família', nav_aniversariante:'Aniversariante', nav_convidados:'Convidados',
+    hero_eyebrow:'Bar-Mitzvah · Men in Black · 2026',
+    hero_subtitle:'Uma noite inesquecível registrada para sempre',
+    hero_date:'18 de Abril de 2026 · Bar-Mitzvah',
+    scroll:'Scroll',
+    highlights_label:'Slideshow', highlights_title:'DESTAQUES', highlights_sub:'Os melhores momentos da noite',
+    album_label:'Álbum Completo', album_title:'GALERIA', album_sub:'Cada momento, cada emoção',
+    tab_tudo:'Tudo', tab_familia:'Família', tab_recepcao:'Recepção', tab_convidados:'Convidados',
+    tab_discurso:'Discurso', tab_pista:'Pista de Dança', tab_decoracao:'Decoração',
+    contact_label:'Contato', contact_title:'ENTRE EM CONTATO',
+    footer_slogan:'Fotografando memórias que duram para sempre',
+    familia_title:'FAMÍLIA', familia_h2:'Os Pilares de Tudo',
+    familia_p1:'A família é o primeiro lar que conhecemos — o lugar onde aprendemos a amar, a crescer e a nos tornar quem somos. Nesta noite especial, cada abraço, cada sorriso e cada lágrima de emoção contou uma história.',
+    familia_p2:'Estar rodeado daqueles que nos amam incondicionalmente é o maior presente que a vida pode oferecer. A Bar-Mitzvah de Elad confirmou que ele nunca estará sozinho nessa jornada.',
+    familia_quote:'"A família é onde a vida começa e o amor nunca termina."',
+    gallery_familia:'Galeria · Família',
+    aniv_title:'ELAD LYRON', aniv_h2:'O Protagonista da Noite',
+    aniv_p1:'Elad Lyron chegou a um dos momentos mais importantes de sua vida com uma elegância única. Vestindo o tema Men in Black com toda a sua personalidade, ele mostrou ao mundo que está pronto.',
+    aniv_p2:'Com olhos que brilhavam de emoção e um sorriso que iluminava cada canto do salão, Elad celebrou não apenas os seus 13 anos, mas tudo que construiu com dedicação, fé e amor.',
+    aniv_quote:'"Hoje você não é apenas mais velho — você é maior, mais forte, mais você."',
+    gallery_aniv:'Galeria · Aniversariante',
+    conv_title:'CONVIDADOS', conv_h2:'A Alegria de Cada Presença',
+    conv_p1:'Uma celebração só é verdadeiramente especial quando rodeada das pessoas certas. Cada convidado trouxe consigo uma história, um vínculo, uma parte da trajetória de Elad.',
+    conv_p2:'Rostos sorridentes, danças sem fim e conversas emocionadas preencheram cada momento. A energia daquela noite foi alimentada pelo amor genuíno de todos presentes.',
+    conv_quote:'"A alegria multiplicada é a mais bonita de todas."',
+    gallery_conv:'Galeria · Convidados'
   },
   fr: {
-    nav_home: 'Accueil', nav_familia: 'Famille', nav_aniversariante: 'Le Fêté', nav_convidados: 'Invités',
-    hero_badge: 'Bar-Mitsvah · Men in Black · 2026',
-    hero_subtitle: 'Une nuit que le temps ne pourra effacer',
-    scroll_text: 'DÉFILER',
-    highlights_title: 'Moments Forts',
-    gallery_title: 'Galerie',
-    tab_familia: 'Famille', tab_recepcao: 'Réception', tab_convidados: 'Invités',
-    tab_discurso: 'Discours', tab_pista: 'Piste de Danse', tab_decoracao: 'Décoration',
-    familia_eyebrow: 'La force d\'un clan',
-    familia_quote: 'La famille est le fondement sur lequel toute histoire de vie est construite. En ce jour sacré, chaque regard échangé, chaque étreinte, chaque larme de joie témoigne d\'un amour qui traverse les générations. Elad, tu es ici parce que chaque personne de cette famille a un jour choisi d\'être là. Et ce choix est le plus grand cadeau.',
-    aniv_eyebrow: 'L\'homme de la nuit',
-    aniv_quote: 'Treize ans. Un passage. Un jeune homme qui fait aujourd\'hui un pas en avant et dit au monde : "Je suis prêt." Avec une élégance digne d\'un agent secret et un cœur plein de rêves, Elad Lyron entre dans cette nouvelle étape de la vie avec la grâce de celui qui sait déjà que la plus grande aventure est encore à venir.',
-    conv_eyebrow: 'Les agents de la nuit',
-    conv_quote: 'Une célébration n\'a de sens que lorsqu\'elle est partagée. Chaque invité a apporté avec lui un souvenir, un sourire, une histoire qui s\'entrelace pour toujours avec la nuit d\'Elad. Réunis par le même thème, le même élégant noir et blanc, ils furent les agents de la joie qui ont rendu cette nuit véritablement inoubliable.',
-    all_photos: 'Toutes les Photos',
-    footer_tagline: 'Photographie & Cinématographie',
-    footer_rights: 'Tous droits réservés',
+    nav_home:'Accueil', nav_familia:'Famille', nav_aniversariante:'Bar-Mitsvah', nav_convidados:'Invités',
+    hero_eyebrow:'Bar-Mitsva · Men in Black · 2026',
+    hero_subtitle:'Une nuit inoubliable capturée pour toujours',
+    hero_date:'18 Avril 2026 · Bar-Mitsva',
+    scroll:'Défiler',
+    highlights_label:'Diaporama', highlights_title:'TEMPS FORTS', highlights_sub:'Les meilleurs moments de la soirée',
+    album_label:'Album Complet', album_title:'GALERIE', album_sub:'Chaque instant, chaque émotion',
+    tab_tudo:'Tout', tab_familia:'Famille', tab_recepcao:'Réception', tab_convidados:'Invités',
+    tab_discurso:'Discours', tab_pista:'Piste de Danse', tab_decoracao:'Décoration',
+    contact_label:'Contact', contact_title:'CONTACTEZ-NOUS',
+    footer_slogan:'Photographier des souvenirs qui durent éternellement',
+    familia_title:'FAMILLE', familia_h2:'Les Piliers de Tout',
+    familia_p1:"La famille est le premier foyer que nous connaissons — l'endroit où nous apprenons à aimer, à grandir. Cette nuit spéciale, chaque étreinte et chaque sourire ont raconté une belle histoire.",
+    familia_p2:"Être entouré de ceux qui nous aiment inconditionnellement est le plus grand cadeau. La Bar-Mitsva d'Elad a confirmé qu'il ne sera jamais seul dans ce voyage.",
+    familia_quote:'"La famille, c\'est là où la vie commence et où l\'amour ne finit jamais."',
+    gallery_familia:'Galerie · Famille',
+    aniv_title:'ELAD LYRON', aniv_h2:'Le Protagoniste de la Soirée',
+    aniv_p1:"Elad Lyron est arrivé à l'un des moments les plus importants de sa vie avec une élégance unique. Portant le thème Men in Black avec toute sa personnalité, il a montré au monde qu'il est prêt.",
+    aniv_p2:"Avec des yeux qui brillaient d'émotion, Elad a célébré non seulement ses 13 ans, mais tout ce qu'il a construit avec dévotion, foi et amour.",
+    aniv_quote:'"Aujourd\'hui tu n\'es pas seulement plus âgé — tu es plus grand, plus fort, plus toi."',
+    gallery_aniv:'Galerie · Bar-Mitsva',
+    conv_title:'INVITÉS', conv_h2:'La Joie de Chaque Présence',
+    conv_p1:"Une célébration n'est vraiment spéciale que lorsqu'elle est entourée des bonnes personnes. Chaque invité a apporté une histoire, un lien, une partie du parcours d'Elad.",
+    conv_p2:"Des visages souriants, des danses sans fin et des conversations émouvantes ont rempli chaque instant. L'énergie de cette nuit a été alimentée par l'amour sincère de tous.",
+    conv_quote:'"La joie partagée est la plus belle de toutes."',
+    gallery_conv:'Galerie · Invités'
   },
   en: {
-    nav_home: 'Home', nav_familia: 'Family', nav_aniversariante: 'Birthday Boy', nav_convidados: 'Guests',
-    hero_badge: 'Bar-Mitzvah · Men in Black · 2026',
-    hero_subtitle: 'A night time will never erase',
-    scroll_text: 'SCROLL',
-    highlights_title: 'Highlights',
-    gallery_title: 'Gallery',
-    tab_familia: 'Family', tab_recepcao: 'Reception', tab_convidados: 'Guests',
-    tab_discurso: 'Speeches', tab_pista: 'Dance Floor', tab_decoracao: 'Decoration',
-    familia_eyebrow: 'The strength of a clan',
-    familia_quote: 'Family is the foundation upon which every life story is built. On this sacred day, every glance exchanged, every embrace given, every tear of joy shed is the testament of a love that spans generations. Elad, you are here because every person in this family once chose to be. And that choice is the greatest gift.',
-    aniv_eyebrow: 'The man of the night',
-    aniv_quote: 'Thirteen years. A passage. A young man who today steps forward and tells the world: "I am ready." With elegance worthy of a secret agent and a heart full of dreams, Elad Lyron enters this new phase of life with the grace of one who already knows the greatest adventure is yet to come.',
-    conv_eyebrow: 'The agents of the night',
-    conv_quote: 'A celebration only makes sense when shared. Every guest brought with them a memory, a smile, a story that forever intertwines with Elad\'s night. United by the same theme, the same elegant black and white, they were the agents of joy who made this night truly unforgettable.',
-    all_photos: 'All Photos',
-    footer_tagline: 'Photography & Cinematography',
-    footer_rights: 'All rights reserved',
+    nav_home:'Home', nav_familia:'Family', nav_aniversariante:'Bar-Mitzvah Boy', nav_convidados:'Guests',
+    hero_eyebrow:'Bar-Mitzvah · Men in Black · 2026',
+    hero_subtitle:'An unforgettable night captured forever',
+    hero_date:'April 18, 2026 · Bar-Mitzvah',
+    scroll:'Scroll',
+    highlights_label:'Slideshow', highlights_title:'HIGHLIGHTS', highlights_sub:'The best moments of the night',
+    album_label:'Full Album', album_title:'GALLERY', album_sub:'Every moment, every emotion',
+    tab_tudo:'All', tab_familia:'Family', tab_recepcao:'Reception', tab_convidados:'Guests',
+    tab_discurso:'Speech', tab_pista:'Dance Floor', tab_decoracao:'Decoration',
+    contact_label:'Contact', contact_title:'GET IN TOUCH',
+    footer_slogan:'Photographing memories that last forever',
+    familia_title:'FAMILY', familia_h2:'The Pillars of Everything',
+    familia_p1:'Family is the first home we know — the place where we learn to love, to grow, and to become who we are. On this special night, every hug and every smile told a story.',
+    familia_p2:"Being surrounded by those who love us unconditionally is life's greatest gift. Elad's Bar-Mitzvah confirmed that he will never be alone on this journey.",
+    familia_quote:'"Family is where life begins and love never ends."',
+    gallery_familia:'Gallery · Family',
+    aniv_title:'ELAD LYRON', aniv_h2:'The Star of the Night',
+    aniv_p1:"Elad Lyron arrived at one of the most important moments of his life with unique elegance. Embracing the Men in Black theme with all his personality, he showed the world he is ready.",
+    aniv_p2:"With eyes shining with emotion and a smile that lit up every corner of the hall, Elad celebrated not just his 13 years, but everything he built with dedication, faith and love.",
+    aniv_quote:'"Today you are not just older — you are greater, stronger, more yourself."',
+    gallery_aniv:'Gallery · Bar-Mitzvah Boy',
+    conv_title:'GUESTS', conv_h2:'The Joy of Every Presence',
+    conv_p1:"A celebration is only truly special when surrounded by the right people. Every guest brought a story, a bond, a part of Elad's journey.",
+    conv_p2:"Smiling faces, endless dancing and emotional conversations filled every moment. The energy of that night was fueled by the genuine love of everyone present.",
+    conv_quote:'"Multiplied joy is the most beautiful of all."',
+    gallery_conv:'Gallery · Guests'
   }
 };
 
+// ─── STATE ────────────────────────────────────────────────────────
 let currentLang = 'pt';
+let slideshowIndex = 0;
+let slideshowTimer;
+let lbImages = [], lbIndex = 0;
+const slideshows = {};
 
+// ─── INIT ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2000);
+  buildMainSlideshow();
+  buildGalleries();
+  buildHScrolls();
+  setLang('pt');
+  startSlideshowAuto('mainSlideshow');
+});
+
+// Scroll header
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Cursor
+document.addEventListener('mousemove', e => {
+  document.getElementById('cursor').style.left = e.clientX + 'px';
+  document.getElementById('cursor').style.top = e.clientY + 'px';
+  setTimeout(() => {
+    document.getElementById('cursor-ring').style.left = e.clientX + 'px';
+    document.getElementById('cursor-ring').style.top = e.clientY + 'px';
+  }, 60);
+});
+
+// ─── PAGE NAVIGATION ─────────────────────────────────────────────
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── MOBILE NAV ───────────────────────────────────────────────────
+function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); }
+function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+// ─── LANGUAGE ─────────────────────────────────────────────────────
 function setLang(lang) {
   currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
-  const t = TRANSLATIONS[lang];
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent === lang.toUpperCase());
+  });
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    if (t[key]) el.textContent = t[key];
-  });
-  document.documentElement.lang = lang;
-}
-
-// ==================== BUILD GALLERIES ====================
-function buildMasonry(containerId, photos) {
-  const c = document.getElementById(containerId);
-  if (!c) return;
-  c.innerHTML = '';
-  photos.forEach((src, i) => {
-    const wrap = document.createElement('div');
-    wrap.className = 'img-wrap';
-    wrap.innerHTML = `<img src="${src}" alt="Foto ${i+1}" loading="lazy">
-      <div class="img-overlay"><span class="img-expand">↗</span></div>`;
-    wrap.onclick = () => openLightbox(src, wrap, photos);
-    c.appendChild(wrap);
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][key]) el.textContent = i18n[lang][key];
   });
 }
 
-function buildGrid(containerId, photos) {
-  const c = document.getElementById(containerId);
-  if (!c) return;
-  c.innerHTML = '';
-  photos.forEach((src, i) => {
-    const wrap = document.createElement('div');
-    wrap.className = 'img-wrap';
-    wrap.innerHTML = `<img src="${src}" alt="Foto ${i+1}" loading="lazy">
-      <div class="img-overlay"><span class="img-expand">↗</span></div>`;
-    wrap.onclick = () => openLightbox(src, wrap, photos);
-    c.appendChild(wrap);
+// ─── MAIN SLIDESHOW ───────────────────────────────────────────────
+function buildMainSlideshow() {
+  const container = document.getElementById('mainSlideshow');
+  const dots = document.getElementById('mainSlideshowDots');
+  document.getElementById('mainTotal').textContent = photos.highlights.length;
+  photos.highlights.forEach((src, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide' + (i === 0 ? ' active' : '');
+    slide.innerHTML = `<img src="${src}" alt="Destaque ${i+1}" loading="lazy"><div class="slide-overlay"></div>`;
+    container.insertBefore(slide, container.querySelector('.slide-arrow'));
+    const dot = document.createElement('div');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide('mainSlideshow', i);
+    dots.appendChild(dot);
+  });
+  slideshows['mainSlideshow'] = { index: 0, total: photos.highlights.length };
+}
+
+function goToSlide(id, idx) {
+  const container = document.getElementById(id);
+  const slides = container.querySelectorAll('.slide');
+  const dots = container.parentElement ? container.querySelectorAll('.slide-dot') : [];
+  const dotsEl = document.getElementById(id + 'Dots');
+  const dotsArr = dotsEl ? dotsEl.querySelectorAll('.slide-dot') : [];
+  slides.forEach(s => s.classList.remove('active'));
+  slides[idx].classList.add('active');
+  dotsArr.forEach(d => d.classList.remove('active'));
+  if (dotsArr[idx]) dotsArr[idx].classList.add('active');
+  const currEl = document.getElementById(id.replace('Slideshow','') + 'Current');
+  if (document.getElementById('mainCurrent') && id === 'mainSlideshow') {
+    document.getElementById('mainCurrent').textContent = idx + 1;
+  }
+  slideshows[id].index = idx;
+}
+
+function slideNext(id) {
+  const s = slideshows[id];
+  goToSlide(id, (s.index + 1) % s.total);
+}
+function slidePrev(id) {
+  const s = slideshows[id];
+  goToSlide(id, (s.index - 1 + s.total) % s.total);
+}
+
+function startSlideshowAuto(id) {
+  setInterval(() => slideNext(id), 4500);
+}
+
+// ─── GALLERY TABS ─────────────────────────────────────────────────
+function buildGalleries() {
+  const map = {
+    'tudo': [...photos.familia, ...photos.recepcao, ...photos.convidados, ...photos.discurso, ...photos.pista, ...photos.decoracao, ...photos.aniversariante],
+    'familia-tab': photos.familia,
+    'recepcao': photos.recepcao,
+    'convidados-tab': photos.convidados,
+    'discurso': photos.discurso,
+    'pista': photos.pista,
+    'decoracao': photos.decoracao
+  };
+  Object.entries(map).forEach(([key, imgs]) => {
+    const grid = document.getElementById('grid-' + key);
+    imgs.forEach((src, i) => {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.innerHTML = `<img src="${src}" alt="" loading="lazy">`;
+      item.onclick = () => openLightbox(imgs, i);
+      grid.appendChild(item);
+    });
   });
 }
 
-// ==================== LIGHTBOX ====================
-let lightboxPhotos = [];
-let lightboxIndex = 0;
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  event.target.classList.add('active');
+}
 
-function openLightbox(src, el, photosArr) {
-  lightboxPhotos = photosArr || [src];
-  lightboxIndex = lightboxPhotos.indexOf(src);
-  if (lightboxIndex < 0) lightboxIndex = 0;
-  document.getElementById('lightboxImg').src = lightboxPhotos[lightboxIndex];
+// ─── HSCROLLS ─────────────────────────────────────────────────────
+function buildHScrolls() {
+  const map = {
+    'familia': photos.familia,
+    'aniversariante': photos.aniversariante,
+    'convidados': photos.convidados
+  };
+  Object.entries(map).forEach(([key, imgs]) => {
+    const wrap = document.getElementById('hscroll-' + key);
+    if (!wrap) return;
+    imgs.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.src = src; img.alt = ''; img.loading = 'lazy';
+      img.onclick = () => openLightbox(imgs, i);
+      wrap.appendChild(img);
+    });
+  });
+}
+
+// ─── LIGHTBOX ─────────────────────────────────────────────────────
+function openLightbox(imgs, idx) {
+  lbImages = imgs; lbIndex = idx;
+  document.getElementById('lb-img').src = imgs[idx];
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
 }
-
-function lightboxNav(dir) {
-  lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
-  document.getElementById('lightboxImg').src = lightboxPhotos[lightboxIndex];
-}
-
+document.getElementById('lb-close').onclick = closeLightbox;
+document.getElementById('lightbox').onclick = e => { if (e.target === document.getElementById('lightbox')) closeLightbox(); };
+document.getElementById('lb-prev').onclick = e => { e.stopPropagation(); lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; document.getElementById('lb-img').src = lbImages[lbIndex]; };
+document.getElementById('lb-next').onclick = e => { e.stopPropagation(); lbIndex = (lbIndex + 1) % lbImages.length; document.getElementById('lb-img').src = lbImages[lbIndex]; };
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowRight') lightboxNav(1);
-  if (e.key === 'ArrowLeft') lightboxNav(-1);
-});
-
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) closeLightbox();
-});
-
-// ==================== TABS ====================
-function switchTab(btn, tabId) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(tabId).classList.add('active');
-}
-
-// ==================== PAGE NAVIGATION ====================
-function navigateTo(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
-  document.querySelector(`nav a[data-page="${page}"]`).classList.add('active');
-  window.scrollTo(0,0);
-  // close menu on mobile
-  document.getElementById('mainNav').classList.remove('open');
-}
-
-document.querySelectorAll('nav a[data-page]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    navigateTo(a.dataset.page);
-  });
-});
-
-function toggleMenu() {
-  document.getElementById('mainNav').classList.toggle('open');
-}
-
-// ==================== CURSOR ====================
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-  setTimeout(() => {
-    ring.style.left = e.clientX + 'px';
-    ring.style.top = e.clientY + 'px';
-  }, 80);
-});
-
-// ==================== SCROLL REVEAL ====================
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
-}, { threshold: 0.1 });
-
-function observeReveals() {
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}
-
-// ==================== INIT ====================
-window.addEventListener('DOMContentLoaded', () => {
-  // Build all galleries
-  buildMasonry('gal-familia', PHOTOS.familia);
-  buildMasonry('gal-recepcao', PHOTOS.recepcao);
-  buildMasonry('gal-convidados', PHOTOS.convidados);
-  buildMasonry('gal-discurso', PHOTOS.discurso);
-  buildMasonry('gal-pista', PHOTOS.pista);
-  buildMasonry('gal-decoracao', PHOTOS.decoracao);
-
-  buildGrid('full-familia', PHOTOS.familia);
-  buildGrid('full-aniversariante', PHOTOS.aniversariante);
-  buildGrid('full-convidados', PHOTOS.convidados);
-
-  observeReveals();
-  setLang('pt');
+  if (document.getElementById('lightbox').classList.contains('open')) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
+    if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
+  }
 });
 </script>
 </body>
